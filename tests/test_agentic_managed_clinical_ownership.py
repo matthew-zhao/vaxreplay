@@ -584,7 +584,8 @@ def test_process_cleanup_rejects_replaced_pid_file(
     )
     process = next(item for item in artifacts if item.artifact_kind == 'process_group')
     pid_file = Path(ledger.latest(RUN_ID).record.firecracker_pid_file_path or '')
-    pid_file.unlink()
+    original_pid_file = pid_file.with_name(f'{pid_file.name}.replaced')
+    pid_file.rename(original_pid_file)
     pid_file.write_text(f'{FIRECRACKER_PID}\n', encoding='ascii')
 
     with pytest.raises(ManagedClinicalOwnershipError, match='pid file changed identity'):
