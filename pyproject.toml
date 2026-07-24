@@ -1,0 +1,75 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vaxreplay"
+version = "0.1.0a1"
+description = "Pre-alpha toolkit for temporally controlled biomedical evaluation"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+  "cryptography>=43",
+  "pydantic>=2.10,<3",
+]
+
+[project.urls]
+Repository = "https://github.com/matthew-zhao/vaxreplay"
+Issues = "https://github.com/matthew-zhao/vaxreplay/issues"
+
+[project.optional-dependencies]
+dev = [
+  "asn1crypto>=1.5.1,<2",
+  "certifi>=2025.8.3",
+  "pytest>=8",
+  "rfc3161-client==1.0.7",
+  "ruff>=0.9",
+  "ty>=0.0.24",
+]
+witness = [
+  "asn1crypto>=1.5.1,<2",
+  "certifi>=2025.8.3",
+  "rfc3161-client==1.0.7",
+]
+tier-a = [
+  "asn1crypto>=1.5.1,<2",
+  "certifi>=2025.8.3",
+  "rfc3161-client==1.0.7",
+]
+
+[project.scripts]
+vaxreplay = "vaxreplay.cli:main"
+vaxreplay-iedb = "vaxreplay.iedb.cli:main"
+vaxreplay-feasibility = "vaxreplay.feasibility.cli:main"
+vaxreplay-prospective = "vaxreplay.prospective_cli:main"
+vaxreplay-runner = "vaxreplay.runner.cli:main"
+vaxreplay-ops = "vaxreplay.operations.cli:main"
+vaxreplay-release-readiness = "vaxreplay.operations.release_readiness_cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.vaxreplay.public-preview]
+reduced-entrypoints = true
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.format]
+quote-style = "single"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]

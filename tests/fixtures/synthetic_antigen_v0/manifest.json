@@ -1,0 +1,22 @@
+{
+  "schema_version": "vaxreplay.v0.1",
+  "episode_id": "synthetic-antigen-001",
+  "lineage_group_id": "synthetic-lineage-alpha",
+  "synthetic": true,
+  "task_type": "antigen_target_prioritization",
+  "split": "train",
+  "decision_at": "2024-01-15T00:00:00Z",
+  "closed_book": true,
+  "network_allowed": false,
+  "portfolio_size": 2,
+  "candidate_ids": ["target-17", "target-42", "target-88"],
+  "forecast_targets": [
+    {"target_id": "functional_validation", "horizon_days": 180}
+  ],
+  "required_dimensions": ["conservation_breadth", "immune_accessibility", "functional_evidence"],
+  "evidence_sha256": "eb10593153e52d32fea62aa110e9886eaa9d850fd41dfd7781523231ce05eda5",
+  "candidates_sha256": "d59afe72da94244dcd77e5f90f8f2f63303223387c85cc301deee726ea127659",
+  "labels_sha256": "fa8c5af59c3e0242d5891e59922b1379bffcea492a4a89e49c2b05b8b8a29a3d",
+  "adjudication_version": "synthetic-v1",
+  "reward_version": "v0.1"
+}

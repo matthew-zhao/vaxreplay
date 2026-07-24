@@ -1,0 +1,98 @@
+[
+  {
+    "tcell_id": 700001,
+    "tcell_iri": "IEDB_ASSAY:700001",
+    "structure_iri": "IEDB_EPITOPE:900001",
+    "qualitative_measure": "Negative",
+    "assay_iris": "OBI:1110059",
+    "assay_names": "IFNg release|ELISPOT",
+    "reference_iri": "IEDB_REFERENCE:800001",
+    "reference_titles": ["Fictional early cellular study"],
+    "reference_dates": ["2018"],
+    "parent_source_antigen_iri": "UNIPROT:P00001",
+    "parent_source_antigen_name": "Fictional surface protein A",
+    "curated_source_antigen": {
+      "name": "Fictional surface protein A isoform 1",
+      "starting_position": 41,
+      "ending_position": 49
+    },
+    "source_organism_iri": "NCBITaxon:999001",
+    "source_organism_name": "Fictional virus",
+    "host_organism_iri": "NCBITaxon:9606",
+    "host_organism_name": "Homo sapiens (human)",
+    "mhc_allele_iri": "MRO:0000001",
+    "mhc_allele_name": "HLA-A*02:01"
+  },
+  {
+    "tcell_id": 700002,
+    "tcell_iri": "IEDB_ASSAY:700002",
+    "structure_iri": "IEDB_EPITOPE:900002",
+    "qualitative_measure": "Negative",
+    "assay_iris": "OBI:1110059",
+    "assay_names": "IFNg release|ELISPOT",
+    "reference_iri": "IEDB_REFERENCE:800001",
+    "reference_titles": ["Fictional early cellular study"],
+    "reference_dates": ["2018"],
+    "parent_source_antigen_iri": "UNIPROT:P00002",
+    "parent_source_antigen_name": "Fictional surface protein B",
+    "curated_source_antigen": {
+      "name": "Fictional surface protein B isoform 1",
+      "starting_position": 70,
+      "ending_position": 78
+    },
+    "source_organism_iri": "NCBITaxon:999001",
+    "source_organism_name": "Fictional virus",
+    "host_organism_iri": "NCBITaxon:9606",
+    "host_organism_name": "Homo sapiens (human)",
+    "mhc_allele_iri": "MRO:0000001",
+    "mhc_allele_name": "HLA-A*02:01"
+  },
+  {
+    "tcell_id": 700101,
+    "tcell_iri": "IEDB_ASSAY:700101",
+    "structure_iri": "IEDB_EPITOPE:900001",
+    "qualitative_measure": "Positive-High",
+    "assay_iris": "OBI:1110059",
+    "assay_names": "IFNg release|ELISPOT",
+    "reference_iri": "IEDB_REFERENCE:899999",
+    "reference_titles": ["Fictional held-out cellular validation"],
+    "reference_dates": ["2009"],
+    "parent_source_antigen_iri": "UNIPROT:P00001",
+    "parent_source_antigen_name": "Fictional surface protein A",
+    "curated_source_antigen": {
+      "name": "Fictional surface protein A isoform 1",
+      "starting_position": 41,
+      "ending_position": 49
+    },
+    "source_organism_iri": "NCBITaxon:999001",
+    "source_organism_name": "Fictional virus",
+    "host_organism_iri": "NCBITaxon:9606",
+    "host_organism_name": "Homo sapiens (human)",
+    "mhc_allele_iri": "MRO:0000001",
+    "mhc_allele_name": "HLA-A*02:01"
+  },
+  {
+    "tcell_id": 700102,
+    "tcell_iri": "IEDB_ASSAY:700102",
+    "structure_iri": "IEDB_EPITOPE:900002",
+    "qualitative_measure": "Negative",
+    "assay_iris": "OBI:1110059",
+    "assay_names": "IFNg release|ELISPOT",
+    "reference_iri": "IEDB_REFERENCE:899999",
+    "reference_titles": ["Fictional held-out cellular validation"],
+    "reference_dates": ["2009"],
+    "parent_source_antigen_iri": "UNIPROT:P00002",
+    "parent_source_antigen_name": "Fictional surface protein B",
+    "curated_source_antigen": {
+      "name": "Fictional surface protein B isoform 1",
+      "starting_position": 70,
+      "ending_position": 78
+    },
+    "source_organism_iri": "NCBITaxon:999001",
+    "source_organism_name": "Fictional virus",
+    "host_organism_iri": "NCBITaxon:9606",
+    "host_organism_name": "Homo sapiens (human)",
+    "mhc_allele_iri": "MRO:0000001",
+    "mhc_allele_name": "HLA-A*02:01"
+  }
+]

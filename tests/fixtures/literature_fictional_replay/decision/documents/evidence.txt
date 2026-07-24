@@ -1,0 +1,5 @@
+Target alpha produced a strong cellular response in the fictional pre-cutoff assay.
+Target beta showed weak stability in the fictional pre-cutoff assay.
+Target gamma produced a moderate cellular response in the fictional pre-cutoff assay.
+Target delta showed inconsistent stability in the fictional pre-cutoff assay.
+

@@ -1,0 +1,55 @@
+"""AACT-backed early-clinical arm-prioritization replay adapter."""
+
+from vaxreplay.clinicaltrials.adapter import AactAdapterError, audit_episode, build_episode
+from vaxreplay.clinicaltrials.extract import (
+    AactSliceError,
+    LoadedAactSlice,
+    extract_nct_slice_from_archive,
+    file_sha256,
+    inspect_table,
+    load_slice,
+    verify_archive_file,
+)
+from vaxreplay.clinicaltrials.schema import (
+    AACT_ADAPTER_ID,
+    AACT_RUBRIC_VERSION,
+    EARLY_CLINICAL_TASK,
+    AactArchiveReceipt,
+    AactSliceReceipt,
+    AactSourceTable,
+    AactTableReceipt,
+    ArmMappingSpec,
+    ArmRole,
+    EarlyClinicalEpisodeSpec,
+    OutcomeEndpointSpec,
+    OutcomeRubric,
+    PanelSelector,
+    normalize_regimen_title,
+)
+
+__all__ = [
+    'AACT_ADAPTER_ID',
+    'AACT_RUBRIC_VERSION',
+    'EARLY_CLINICAL_TASK',
+    'AactAdapterError',
+    'AactArchiveReceipt',
+    'AactSliceError',
+    'AactSliceReceipt',
+    'AactSourceTable',
+    'AactTableReceipt',
+    'ArmMappingSpec',
+    'ArmRole',
+    'EarlyClinicalEpisodeSpec',
+    'LoadedAactSlice',
+    'OutcomeEndpointSpec',
+    'OutcomeRubric',
+    'PanelSelector',
+    'audit_episode',
+    'build_episode',
+    'extract_nct_slice_from_archive',
+    'file_sha256',
+    'inspect_table',
+    'load_slice',
+    'normalize_regimen_title',
+    'verify_archive_file',
+]

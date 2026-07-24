@@ -1,0 +1,81 @@
+"""Reward-hacking QA and signed gradient-admission contracts."""
+
+from vaxreplay.qa.admission import (
+    GradientAdmissionError,
+    InMemoryAdmissionTokenConsumer,
+    gradient_admission_signing_key_id,
+)
+from vaxreplay.qa.attestation import (
+    QAReportAttestationError,
+    SignedRewardQAReport,
+    attest_reward_qa_report,
+    qa_report_signing_key_id,
+    reward_qa_report_attestation_sha256,
+    verify_reward_qa_report_attestation,
+)
+from vaxreplay.qa.authority import (
+    SignedGradientAdmission,
+    TrainingRuntimeBindings,
+    issue_training_batch_admission,
+)
+from vaxreplay.qa.firewall import (
+    QuarantinedBatch,
+    QuarantinedTrajectory,
+    ReleasedTrainingReward,
+    ReplayScorerPair,
+    RewardFirewallQuarantine,
+    TrainingRewardFirewall,
+    build_quarantined_batch,
+    release_training_batch,
+)
+from vaxreplay.qa.schema import (
+    ComponentFloorSpec,
+    ComponentScore,
+    GradientAdmissionToken,
+    QACategory,
+    QADisposition,
+    QASeverity,
+    RewardContract,
+    RewardQAFinding,
+    RewardQAReport,
+    TrainingRunAdmission,
+    reward_contract_sha256,
+    reward_qa_report_sha256,
+    training_run_admission_sha256,
+)
+
+__all__ = [
+    'ComponentFloorSpec',
+    'ComponentScore',
+    'GradientAdmissionError',
+    'GradientAdmissionToken',
+    'InMemoryAdmissionTokenConsumer',
+    'QACategory',
+    'QADisposition',
+    'QAReportAttestationError',
+    'QASeverity',
+    'QuarantinedBatch',
+    'QuarantinedTrajectory',
+    'ReplayScorerPair',
+    'ReleasedTrainingReward',
+    'RewardContract',
+    'RewardFirewallQuarantine',
+    'RewardQAFinding',
+    'RewardQAReport',
+    'SignedGradientAdmission',
+    'SignedRewardQAReport',
+    'TrainingRunAdmission',
+    'TrainingRuntimeBindings',
+    'TrainingRewardFirewall',
+    'attest_reward_qa_report',
+    'build_quarantined_batch',
+    'gradient_admission_signing_key_id',
+    'issue_training_batch_admission',
+    'qa_report_signing_key_id',
+    'release_training_batch',
+    'reward_contract_sha256',
+    'reward_qa_report_attestation_sha256',
+    'reward_qa_report_sha256',
+    'training_run_admission_sha256',
+    'verify_reward_qa_report_attestation',
+]

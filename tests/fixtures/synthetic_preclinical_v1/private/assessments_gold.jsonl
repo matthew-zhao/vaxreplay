@@ -1,0 +1,8 @@
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-preclinical-001","candidate_id":"candidate-a","dimension":"development_readiness","conclusion":"favorable"}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-preclinical-001","candidate_id":"candidate-a","dimension":"response_breadth","conclusion":"favorable"}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-preclinical-001","candidate_id":"candidate-b","dimension":"development_readiness","conclusion":"favorable"}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-preclinical-001","candidate_id":"candidate-b","dimension":"response_breadth","conclusion":"concern"}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-preclinical-001","candidate_id":"candidate-c","dimension":"development_readiness","conclusion":"concern"}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-preclinical-001","candidate_id":"candidate-c","dimension":"response_breadth","conclusion":"favorable"}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-preclinical-001","candidate_id":"candidate-d","dimension":"development_readiness","conclusion":"concern"}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-preclinical-001","candidate_id":"candidate-d","dimension":"response_breadth","conclusion":"concern"}
