@@ -1,0 +1,26 @@
+{
+  "schema_version": "vaxreplay.iedb_episode_spec.v0.1",
+  "episode_id": "iedb-fictional-cohort-001",
+  "lineage_group_id": "iedb-fictional-lineage-alpha",
+  "synthetic": true,
+  "split": "train",
+  "decision_at": "2020-01-01T00:00:00Z",
+  "outcome_as_of": "2020-06-29T00:00:00Z",
+  "portfolio_size": 1,
+  "candidates": [
+    {"candidate_id": "cand-beta", "structure_iri": "IEDB_EPITOPE:900002"},
+    {"candidate_id": "cand-alpha", "structure_iri": "IEDB_EPITOPE:900001"}
+  ],
+  "evidence_endpoints": ["tcell_search", "bcell_search"],
+  "label_endpoint": "tcell_search",
+  "label_reference_iri": "IEDB_REFERENCE:899999",
+  "label_assay_iri": "OBI:1110059",
+  "label_mhc_restriction": "HLA-A*02:01",
+  "label_host_organism_iri": "NCBITaxon:9606",
+  "label_source_organism_iri": "NCBITaxon:999001",
+  "min_positive_candidates": 1,
+  "min_negative_candidates": 1,
+  "reward_version": "v1.0",
+  "ranking_rubric_version": "iedb-qualitative-binary-v1",
+  "require_visible_evidence_for_all": true
+}

@@ -1,0 +1,51 @@
+"""Hardened upstream provider adapters used only by the trusted gateway."""
+
+from vaxreplay.agentic.providers.anthropic import (
+    ANTHROPIC_API_VERSION,
+    ANTHROPIC_MESSAGES_ADAPTER_ID,
+    ANTHROPIC_MESSAGES_ENDPOINT_ORIGIN,
+    ANTHROPIC_MESSAGES_ENDPOINT_PATH,
+    ANTHROPIC_MESSAGES_FIXED_PARAMETERS_SHA256,
+    AnthropicHttpRequest,
+    AnthropicHttpResponse,
+    AnthropicHttpTransport,
+    AnthropicMessagesAdapter,
+    AnthropicTransportFailure,
+    UrllibAnthropicHttpTransport,
+)
+from vaxreplay.agentic.providers.openai import (
+    OPENAI_RESPONSES_ADAPTER_ID,
+    OPENAI_RESPONSES_ENDPOINT_ORIGIN,
+    OPENAI_RESPONSES_ENDPOINT_PATH,
+    OPENAI_RESPONSES_FIXED_PARAMETERS_SHA256,
+    OpenAIHttpRequest,
+    OpenAIHttpResponse,
+    OpenAIHttpTransport,
+    OpenAIResponsesAdapter,
+    OpenAITransportFailure,
+    UrllibOpenAIHttpTransport,
+)
+
+__all__ = [
+    'ANTHROPIC_API_VERSION',
+    'ANTHROPIC_MESSAGES_ADAPTER_ID',
+    'ANTHROPIC_MESSAGES_ENDPOINT_ORIGIN',
+    'ANTHROPIC_MESSAGES_ENDPOINT_PATH',
+    'ANTHROPIC_MESSAGES_FIXED_PARAMETERS_SHA256',
+    'AnthropicHttpRequest',
+    'AnthropicHttpResponse',
+    'AnthropicHttpTransport',
+    'AnthropicMessagesAdapter',
+    'AnthropicTransportFailure',
+    'OPENAI_RESPONSES_ADAPTER_ID',
+    'OPENAI_RESPONSES_ENDPOINT_ORIGIN',
+    'OPENAI_RESPONSES_ENDPOINT_PATH',
+    'OPENAI_RESPONSES_FIXED_PARAMETERS_SHA256',
+    'OpenAIHttpRequest',
+    'OpenAIHttpResponse',
+    'OpenAIHttpTransport',
+    'OpenAIResponsesAdapter',
+    'OpenAITransportFailure',
+    'UrllibAnthropicHttpTransport',
+    'UrllibOpenAIHttpTransport',
+]

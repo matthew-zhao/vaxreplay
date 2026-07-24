@@ -1,0 +1,9 @@
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-antigen-001","candidate_id":"target-17","dimension":"conservation_breadth","conclusion":"favorable"}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-antigen-001","candidate_id":"target-17","dimension":"immune_accessibility","conclusion":"favorable"}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-antigen-001","candidate_id":"target-17","dimension":"functional_evidence","conclusion":"favorable"}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-antigen-001","candidate_id":"target-42","dimension":"conservation_breadth","conclusion":"concern"}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-antigen-001","candidate_id":"target-42","dimension":"immune_accessibility","conclusion":"concern"}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-antigen-001","candidate_id":"target-42","dimension":"functional_evidence","conclusion":"concern"}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-antigen-001","candidate_id":"target-88","dimension":"conservation_breadth","conclusion":"insufficient"}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-antigen-001","candidate_id":"target-88","dimension":"immune_accessibility","conclusion":"favorable"}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-antigen-001","candidate_id":"target-88","dimension":"functional_evidence","conclusion":"favorable"}

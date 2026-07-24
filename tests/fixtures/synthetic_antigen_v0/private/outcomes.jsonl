@@ -1,0 +1,4 @@
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-antigen-001","candidate_id":"target-17","target_id":"functional_validation","horizon_days":180,"outcome":1,"candidate_utility":1.0,"revealed_at":"2024-07-13T00:00:00Z","censor_reason":null}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-antigen-001","candidate_id":"target-42","target_id":"functional_validation","horizon_days":180,"outcome":0,"candidate_utility":0.1,"revealed_at":"2024-07-13T00:00:00Z","censor_reason":null}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-antigen-001","candidate_id":"target-88","target_id":"functional_validation","horizon_days":180,"outcome":1,"candidate_utility":0.8,"revealed_at":"2024-07-13T00:00:00Z","censor_reason":null}
+

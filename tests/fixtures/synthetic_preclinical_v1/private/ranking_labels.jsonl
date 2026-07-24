@@ -1,0 +1,4 @@
+{"schema_version":"vaxreplay.ranking.v1.0","episode_id":"synthetic-preclinical-001","candidate_id":"candidate-a","relevance_grade":4,"censor_reason":null}
+{"schema_version":"vaxreplay.ranking.v1.0","episode_id":"synthetic-preclinical-001","candidate_id":"candidate-b","relevance_grade":1,"censor_reason":null}
+{"schema_version":"vaxreplay.ranking.v1.0","episode_id":"synthetic-preclinical-001","candidate_id":"candidate-c","relevance_grade":3,"censor_reason":null}
+{"schema_version":"vaxreplay.ranking.v1.0","episode_id":"synthetic-preclinical-001","candidate_id":"candidate-d","relevance_grade":0,"censor_reason":null}

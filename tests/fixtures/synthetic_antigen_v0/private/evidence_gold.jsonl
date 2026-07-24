@@ -1,0 +1,10 @@
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-antigen-001","candidate_id":"target-17","dimension":"conservation_breadth","evidence_id":"ev-surveillance-1","stance":"support","quote":"Target 17 was unchanged across 96 of 100 sampled isolates."}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-antigen-001","candidate_id":"target-17","dimension":"immune_accessibility","evidence_id":"ev-accessibility-1","stance":"support","quote":"target 17 showed strong binding in four of five tested contexts"}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-antigen-001","candidate_id":"target-17","dimension":"functional_evidence","evidence_id":"ev-functional-1","stance":"support","quote":"target 17 active in two"}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-antigen-001","candidate_id":"target-42","dimension":"conservation_breadth","evidence_id":"ev-surveillance-1","stance":"concern","quote":"Target 42 varied in 38 of 100 isolates."}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-antigen-001","candidate_id":"target-42","dimension":"immune_accessibility","evidence_id":"ev-accessibility-1","stance":"concern","quote":"target 42 showed weak binding in one of five"}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-antigen-001","candidate_id":"target-42","dimension":"functional_evidence","evidence_id":"ev-functional-1","stance":"concern","quote":"target 42 inactive in all three"}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-antigen-001","candidate_id":"target-88","dimension":"conservation_breadth","evidence_id":"ev-surveillance-1","stance":"concern","quote":"Target 88 was not assessed."}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-antigen-001","candidate_id":"target-88","dimension":"immune_accessibility","evidence_id":"ev-accessibility-1","stance":"support","quote":"target 88 showed moderate binding in three of five"}
+{"schema_version":"vaxreplay.v0.1","episode_id":"synthetic-antigen-001","candidate_id":"target-88","dimension":"functional_evidence","evidence_id":"ev-functional-1","stance":"support","quote":"target 88 active in three independent runs"}
+

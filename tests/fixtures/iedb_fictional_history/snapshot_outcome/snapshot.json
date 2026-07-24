@@ -1,0 +1,50 @@
+{
+  "schema_version": "vaxreplay.iedb_snapshot.v0.1",
+  "snapshot_id": "fictional-iedb-20200629",
+  "synthetic": true,
+  "source_build_at": "2020-06-29T00:00:00Z",
+  "retrieved_at": "2020-06-30T00:00:00Z",
+  "source_base_url": "https://query-api.iedb.org",
+  "license_id": "CC0-1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "citation": "Fictional IEDB-shaped VaxReplay test fixture; not IEDB data.",
+  "third_party_rights_reviewed": true,
+  "api_metrics_relative_path": "api_metrics.json",
+  "api_metrics_sha256": "620572a41e9db87d2577ca1c5f0c592649f3eddb548febc569158ef04b03f7b2",
+  "api_metrics_after_relative_path": "api_metrics_after.json",
+  "api_metrics_after_sha256": "620572a41e9db87d2577ca1c5f0c592649f3eddb548febc569158ef04b03f7b2",
+  "api_metrics_naive_timezone": "UTC",
+  "tables": [
+    {
+      "endpoint": "tcell_search",
+      "relative_path": "tcell_search.json",
+      "format": "json",
+      "source_url": "https://query-api.iedb.org/tcell_search?order=tcell_id",
+      "order_by": "tcell_id",
+      "request_sha256": "72cbae37db192487b2c7930983f0e80b62ffc6a127fcef332e8a4ae6be90d81c",
+      "content_range": "0-3/4",
+      "complete_capture": true,
+      "source_build_at": "2020-06-29T00:00:00Z",
+      "sha256": "6e591317c63322c32d3bcfd550fd088cceed2bf5d356b712db1d059a3064e51e",
+      "byte_count": 3620,
+      "row_count": 4,
+      "columns_sha256": "a338d31c1adf1abe6d8aafb688d6a87242ebcd145519dced26752546af5fce8c"
+    },
+    {
+      "endpoint": "bcell_search",
+      "relative_path": "bcell_search.json",
+      "format": "json",
+      "source_url": "https://query-api.iedb.org/bcell_search?order=bcell_id",
+      "order_by": "bcell_id",
+      "request_sha256": "3924697e6f56aa28d987c22f795094774368275715072ef0ca31faeaf0925677",
+      "content_range": "0-1/2",
+      "complete_capture": true,
+      "source_build_at": "2020-06-29T00:00:00Z",
+      "sha256": "e8d0294fc048f2dbbd26211b357e8cd82137f90a2d85c9e7e9fda849261a10be",
+      "byte_count": 1779,
+      "row_count": 2,
+      "columns_sha256": "8f6696b1e8bcf5abeb376842ab8629e7ec760e77b43e03f480f60fcef8eece6e"
+    }
+  ]
+}

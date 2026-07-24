@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use the VaxReplay technical-preview software, cite it using this metadata."
+title: "VaxReplay: infrastructure for temporally controlled biomedical evaluation"
+type: software
+version: 0.1.0-alpha.1
+date-released: 2026-07-24
+license: Apache-2.0
+repository-code: "https://github.com/matthew-zhao/vaxreplay"
+authors:
+  - family-names: "Zhao"
+    given-names: "Matthew"

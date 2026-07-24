@@ -1,0 +1,1 @@
+{"outcome_canary":"OUTCOME-CANARY-7X9Q","revealed_at":"2020-07-06T00:00:00Z","rows":[{"candidate_id":"target-alpha","outcome":1,"utility":1.0},{"candidate_id":"target-beta","outcome":0,"utility":0.0},{"candidate_id":"target-gamma","outcome":1,"utility":0.8},{"candidate_id":"target-delta","outcome":0,"utility":0.2},{"candidate_id":"outcome-only-decoy","outcome":1,"utility":1.0}]}

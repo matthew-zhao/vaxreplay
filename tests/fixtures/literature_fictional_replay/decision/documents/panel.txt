@@ -1,0 +1,6 @@
+Fictional Virus Alpha complete immune-target panel.
+row-001 | target-alpha | included under the preregistered complete-table rule.
+row-002 | target-beta | included under the preregistered complete-table rule.
+row-003 | target-gamma | included under the preregistered complete-table rule.
+row-004 | target-delta | included under the preregistered complete-table rule.
+
