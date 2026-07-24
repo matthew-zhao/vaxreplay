@@ -736,13 +736,14 @@ def test_fixed_deployment_staging_identity_swap_is_detected_without_deleting_rep
     monkeypatch.setattr(collector, '_require_root_directory_path', lambda path, **_kwargs: path)
     original_write = collector._write_create_once
     staging_root = paths.config_root.parent / f'.lane-a-managed.staging-{paths.drill_id}'
+    original_staging_root = staging_root.with_name(f'{staging_root.name}.replaced')
     write_count = 0
 
     def swap_staging_identity(path: Path, payload: bytes, *, mode: int = 0o600) -> None:
         nonlocal write_count
         write_count += 1
         if write_count == 4:
-            shutil.rmtree(staging_root)
+            staging_root.rename(original_staging_root)
             staging_root.mkdir(mode=0o700)
             (staging_root / 'foreign-replacement').write_bytes(b'preserve-me')
             raise collector.ManagedClinicalRealKvmDrillError('injected identity swap')
