@@ -546,7 +546,7 @@ def capture_cursor_vendor_identity(
             version_stdout_bytes=len(result.stdout),
             version_stderr_sha256=_sha256(result.stderr),
             version_stderr_bytes=len(result.stderr),
-            reported_version=cast(Literal['2026.07.09-a3815c0'], reported_version),
+            reported_version=reported_version,
             observed_os=platform.system(),
             observed_architecture=platform.machine(),
         )

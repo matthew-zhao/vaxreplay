@@ -559,7 +559,7 @@ def capture_claude_code_vendor_identity(
             version_stdout_bytes=len(result.stdout),
             version_stderr_sha256=_sha256(result.stderr),
             version_stderr_bytes=len(result.stderr),
-            reported_version=cast(Literal['2.1.195 (Claude Code)'], reported_version),
+            reported_version=reported_version,
             observed_os=platform.system(),
             observed_architecture=platform.machine(),
         )
