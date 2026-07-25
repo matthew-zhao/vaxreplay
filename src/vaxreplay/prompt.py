@@ -120,14 +120,11 @@ def build_episode_prompt(
     elif manifest.task_type == EARLY_CLINICAL_ARM_PRIORITIZATION_TASK:
         task_opening = (
             'Prioritize only the already-defined, blinded early-clinical vaccine regimens using only frozen '
-            'pre-results protocol evidence. Rank the regimens by the benchmark-defined composite advancement '
+            'pre-results protocol evidence. Rank the regimens by the episode-defined proxy advancement '
             'objective, not by clinical efficacy. Forecast the probability that each regimen clears the '
-            "benchmark-defined multi-endpoint advancement threshold. The objective divides each regimen's "
-            'Day-91 point estimate by the concurrent control separately for the functional-antibody, '
-            'binding-antibody, and polyfunctional-helper-T-cell endpoints, then takes their equal-weight '
-            'geometric mean. A composite of at least 8 clears the binary threshold; ranking grades use the '
-            'fixed bins below 1, 1 to below 2, 2 to below 4, 4 to below 8, and at least 8. Do not invent or '
-            'modify regimens, infer unshown results, or propose experimental procedures. '
+            'episode-declared threshold. Apply only the endpoint horizon, control normalization, aggregation, '
+            'threshold, and grade bins stated in the visible episode evidence. Do not invent or modify '
+            'regimens, infer unshown results, or propose experimental procedures. '
         )
     else:
         task_opening = (

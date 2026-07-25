@@ -74,7 +74,7 @@ class IedbAdapterTest(unittest.TestCase):
             self.assertIn('Fictional early cellular study', prompt)
             self.assertNotIn('Fictional held-out cellular validation', prompt)
             self.assertNotIn('Positive-High', prompt)
-            self.assertNotIn('IEDB_EPITOPE:900001', prompt)
+            self.assertNotIn('VAXREPLAY_FIXTURE_EPITOPE:ALPHA', prompt)
             self.assertTrue(all('?' not in evidence.provenance_url for evidence in bundle.evidence))
             self.assertTrue(all('SHA-256' not in evidence.derivation for evidence in bundle.evidence))
 
@@ -117,7 +117,7 @@ class IedbAdapterTest(unittest.TestCase):
             outcome_as_of=spec.outcome_as_of,
         )
         outcome_state = history.states['fictional-iedb-20200629'][IedbEndpoint.TCELL]
-        late_assay = outcome_state['IEDB_ASSAY:700101']
+        late_assay = outcome_state['VAXREPLAY_FIXTURE_ASSAY:TCELL-LATE-ALPHA']
 
         self.assertEqual(late_assay.assay.reference_dates, ['2009'])
         self.assertGreater(late_assay.first_seen_at, spec.decision_at)
@@ -129,8 +129,14 @@ class IedbAdapterTest(unittest.TestCase):
             audit = IedbPrivateAudit.model_validate_json((output / 'private' / 'iedb_audit.json').read_bytes())
 
             source_ids = {source.assay_iri for outcome in audit.outcomes for source in outcome.sources}
-            self.assertEqual(source_ids, {'IEDB_ASSAY:700101', 'IEDB_ASSAY:700102'})
-            self.assertNotIn('IEDB_ASSAY:700001', source_ids)
+            self.assertEqual(
+                source_ids,
+                {
+                    'VAXREPLAY_FIXTURE_ASSAY:TCELL-LATE-ALPHA',
+                    'VAXREPLAY_FIXTURE_ASSAY:TCELL-LATE-BETA',
+                },
+            )
+            self.assertNotIn('VAXREPLAY_FIXTURE_ASSAY:TCELL-EARLY-ALPHA', source_ids)
 
     def test_public_export_excludes_private_labels_keys_and_future_evidence(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
@@ -149,9 +155,9 @@ class IedbAdapterTest(unittest.TestCase):
             self.assertEqual(len(public_bundle.evidence), len(public_bundle.visible_evidence))
             exported_text = '\n'.join(path.read_text(encoding='utf-8') for path in public.iterdir() if path.is_file())
             self.assertNotIn('Fictional held-out cellular validation', exported_text)
-            self.assertNotIn('IEDB_REFERENCE:899999', exported_text)
-            self.assertNotIn('IEDB_ASSAY:700101', exported_text)
-            self.assertNotIn('IEDB_EPITOPE:900001', exported_text)
+            self.assertNotIn('VAXREPLAY_FIXTURE_REFERENCE:HELD-OUT-CELLULAR', exported_text)
+            self.assertNotIn('VAXREPLAY_FIXTURE_ASSAY:TCELL-LATE-ALPHA', exported_text)
+            self.assertNotIn('VAXREPLAY_FIXTURE_EPITOPE:ALPHA', exported_text)
             self.assertNotIn('positive_candidate_count', exported_text)
             self.assertNotIn('negative_candidate_count', exported_text)
             self.assertNotIn(metadata_canary, exported_text)
@@ -398,7 +404,7 @@ class IedbAdapterTest(unittest.TestCase):
             shutil.copytree(_fixture_root() / 'snapshot_outcome', copied)
             manifest_path = copied / 'snapshot.json'
             manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
-            url = 'https://query-api.iedb.org/tcell_search?order=tcell_id&reference_id=eq.1'
+            url = 'https://query-api.iedb.org/tcell_search?order=tcell_id&reference_id=eq.-1'
             manifest['tables'][0]['source_url'] = url
             manifest['tables'][0]['request_sha256'] = hashlib.sha256(url.encode()).hexdigest()
             manifest_path.write_text(json.dumps(manifest), encoding='utf-8')
@@ -421,9 +427,9 @@ class IedbAdapterTest(unittest.TestCase):
         assay = normalize_assay(
             IedbEndpoint.TCELL,
             {
-                'tcell_iri': 'IEDB_ASSAY:1',
-                'structure_iri': 'IEDB_EPITOPE:1',
-                'reference_iri': 'IEDB_REFERENCE:1',
+                'tcell_iri': 'VAXREPLAY_FIXTURE_ASSAY:TCELL-1',
+                'structure_iri': 'VAXREPLAY_FIXTURE_EPITOPE:ROW-1',
+                'reference_iri': 'VAXREPLAY_FIXTURE_REFERENCE:ROW-1',
                 'qualitative_measure': 'Positive-Low',
                 'assay_names': '<strong>ELISPOT</strong>',
                 'quantitative_measure': 0,
@@ -436,9 +442,9 @@ class IedbAdapterTest(unittest.TestCase):
         unknown = normalize_assay(
             IedbEndpoint.TCELL,
             {
-                'tcell_iri': 'IEDB_ASSAY:2',
-                'structure_iri': 'IEDB_EPITOPE:2',
-                'reference_iri': 'IEDB_REFERENCE:2',
+                'tcell_iri': 'VAXREPLAY_FIXTURE_ASSAY:TCELL-2',
+                'structure_iri': 'VAXREPLAY_FIXTURE_EPITOPE:ROW-2',
+                'reference_iri': 'VAXREPLAY_FIXTURE_REFERENCE:ROW-2',
                 'qualitative_measure': 'Positive-looking',
             },
         )
@@ -448,14 +454,14 @@ class IedbAdapterTest(unittest.TestCase):
         assay = normalize_assay(
             IedbEndpoint.MHC,
             {
-                'elution_iri': 'IEDB_ASSAY:3',
-                'structure_iri': 'IEDB_EPITOPE:3',
-                'reference_iri': 'IEDB_REFERENCE:3',
+                'elution_iri': 'VAXREPLAY_FIXTURE_ASSAY:ELUTION-3',
+                'structure_iri': 'VAXREPLAY_FIXTURE_EPITOPE:ROW-3',
+                'reference_iri': 'VAXREPLAY_FIXTURE_REFERENCE:ROW-3',
                 'qualitative_measure': 'Negative',
             },
         )
 
-        self.assertEqual(assay.assay_iri, 'IEDB_ASSAY:3')
+        self.assertEqual(assay.assay_iri, 'VAXREPLAY_FIXTURE_ASSAY:ELUTION-3')
         self.assertEqual(assay.polarity, QualitativePolarity.NEGATIVE)
 
 

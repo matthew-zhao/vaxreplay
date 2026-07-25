@@ -14,3 +14,6 @@ The fictional adjudication rubric is fixed before scoring:
 - `0`: weakest profile in the predefined cohort.
 
 The records are test data only and are not scientific or medical evidence.
+
+License identifier: `CC-BY-4.0`. Retain the attribution specified in the repository
+`DATA_LICENSES.md`. There are no upstream data sources.

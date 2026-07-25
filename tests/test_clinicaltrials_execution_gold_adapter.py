@@ -84,12 +84,12 @@ def _fixture(root: Path):
     label_2024 = root / 'label-2024.zip'
     _write_decision_zip(
         decision_2018,
-        decision_anchor=date(2018, 4, 1),
+        decision_anchor=date(2017, 5, 3),
         include_second_study=False,
-        first_lead_sponsor='Moderna',
+        first_lead_sponsor='Fictional Biologics',
     )
     _write_label_zip(label_2022)
-    _write_decision_zip(decision_2020, first_lead_sponsor='Moderna, Inc.')
+    _write_decision_zip(decision_2020, first_lead_sponsor='Fictional Biologics, Inc.')
     _write_label_zip(label_2024)
     _enrich_for_relevance_review(decision_2018)
     _enrich_for_relevance_review(decision_2020)
@@ -98,17 +98,17 @@ def _fixture(root: Path):
     source_2020 = root / 'source-2020'
     build_aact_execution_cohort(
         decision_archive=decision_2018,
-        decision_archive_date=date(2018, 4, 1),
+        decision_archive_date=date(2017, 5, 3),
         label_archive=label_2022,
-        label_archive_date=date(2022, 4, 1),
+        label_archive_date=date(2021, 5, 3),
         output_root=source_2018,
         synthetic_test_only=True,
     )
     build_aact_execution_cohort(
         decision_archive=decision_2020,
-        decision_archive_date=date(2020, 2, 1),
+        decision_archive_date=date(2020, 3, 2),
         label_archive=label_2024,
-        label_archive_date=date(2024, 2, 1),
+        label_archive_date=date(2024, 3, 2),
         output_root=source_2020,
         synthetic_test_only=True,
     )
@@ -117,8 +117,8 @@ def _fixture(root: Path):
         output_root=root / 'merged',
     )
     decision_archives = {
-        date(2018, 4, 1): decision_2018,
-        date(2020, 2, 1): decision_2020,
+        date(2017, 5, 3): decision_2018,
+        date(2020, 3, 2): decision_2020,
     }
     inventory_payload = (merged.root / 'organizer' / 'cohort-inventory.json').read_bytes()
     queue = build_relevance_review_queue(
@@ -362,7 +362,7 @@ def test_stale_hash_model_copy_and_source_archive_mismatch_fail_closed() -> None
                 relevance_review_receipt=forged_review_receipt,
             )
 
-        decision_archives[date(2018, 4, 1)].write_bytes(decision_archives[date(2018, 4, 1)].read_bytes() + b'tamper')
+        decision_archives[date(2017, 5, 3)].write_bytes(decision_archives[date(2017, 5, 3)].read_bytes() + b'tamper')
         with pytest.raises(ExecutionGoldDerivationError, match='exact archive audit'):
             _derive((merged, decision_archives, queue, adjudications, review_receipt, trusted, context))
 

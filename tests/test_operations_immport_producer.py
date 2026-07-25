@@ -41,15 +41,15 @@ _DEFAULT_TLS = object()
 
 def _urls() -> tuple[str, ...]:
     origin = 'https://www.immport.org'
-    study = f'{origin}/data/query/api/study/SDY1234?format=json'
-    manifest = f'{origin}/data/query/api/study/manifest/SDY1234?fileType=release_file&format=json'
+    study = f'{origin}/data/query/api/study/SDY00000000?format=json'
+    manifest = f'{origin}/data/query/api/study/manifest/SDY00000000?fileType=release_file&format=json'
     return (
         f'{origin}/data/query/v3/api-docs',
         study,
         manifest,
-        f'{origin}/data/query/api/study/arm/SDY1234?format=json',
-        f'{origin}/data/query/api/study/experiment/SDY1234?format=json',
-        f'{origin}/data/query/api/study/link/SDY1234?format=json',
+        f'{origin}/data/query/api/study/arm/SDY00000000?format=json',
+        f'{origin}/data/query/api/study/experiment/SDY00000000?format=json',
+        f'{origin}/data/query/api/study/link/SDY00000000?format=json',
         manifest,
         study,
         f'{origin}/data/query/v3/api-docs',
@@ -60,7 +60,7 @@ def _plan(*, plan_id: str = 'immport-production-test-v1') -> ImmportAuthenticate
     return ImmportAuthenticatedCollectionPlan(
         plan_id=plan_id,
         source_id='immport:producer-test',
-        study_accession='SDY1234',
+        study_accession='SDY00000000',
         panel_deadline_seconds=60,
         artifacts=tuple(
             ImmportAuthenticatedArtifactSpec(

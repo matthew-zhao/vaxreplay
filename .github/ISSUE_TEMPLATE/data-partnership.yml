@@ -1,0 +1,89 @@
+name: Biomedical data partnership
+description: Propose a metadata-only feasibility review for a vaccine R&D decision or data source.
+title: "[Data partnership] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for exploring a VaxReplay data partnership. Share metadata only. Do not include restricted records, credentials, participant information, unpublished results, or other sensitive material in this public issue.
+
+  - type: input
+    id: organization_role
+    attributes:
+      label: Organization or role
+      description: A public organization name, team type, or independent role is sufficient.
+      placeholder: Vaccine research institute, public-health agency, data steward, assay lab…
+    validations:
+      required: true
+
+  - type: textarea
+    id: source_custodian
+    attributes:
+      label: Source, dataset, and custodian
+      description: Name the public source or describe the private source at a metadata level, identify its custodian, and state whether you are authorized to propose its use. Write "unknown" where needed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: decision
+    attributes:
+      label: Proposed decision
+      description: What exact prioritization decision should the benchmark evaluate, and at what development stage?
+      placeholder: Rank a closed panel of…
+    validations:
+      required: true
+
+  - type: textarea
+    id: candidate_universe
+    attributes:
+      label: Candidate universe
+      description: How might the complete eligible panel be enumerated, including negative, failed, or missing cases? "Unknown / not yet assessed" is a valid feasibility answer.
+
+  - type: textarea
+    id: cutoff_provenance
+    attributes:
+      label: Decision cutoff and historical provenance
+      description: What might define the cutoff, and what version history or prospective capture may be available? "Unknown / not yet assessed" is valid.
+
+  - type: textarea
+    id: outcomes
+    attributes:
+      label: Later outcomes
+      description: What could be observed later, at what horizon, and what is known about missing, censored, delayed, or conflicting observations? "Unknown / not yet assessed" is valid.
+
+  - type: textarea
+    id: linkage
+    attributes:
+      label: Candidate and lineage linkage
+      description: What linkage may exist, and which related programs may need to remain in one train/dev/test split? "Unknown / not yet assessed" is valid.
+
+  - type: textarea
+    id: rights
+    attributes:
+      label: Access, privacy, and redistribution constraints
+      description: Summarize known access conditions and review requirements without sharing restricted content. "Unknown / not yet assessed" is valid.
+
+  - type: textarea
+    id: responsible_research
+    attributes:
+      label: Responsible-research and ethics considerations
+      description: Note any known pathogen, dual-use, human-research, consent, data-use, or model-provider processing considerations. "Unknown / not yet assessed" is valid.
+
+  - type: textarea
+    id: scientific_review
+    attributes:
+      label: Scientific review
+      description: What domain expertise may be available to review the task definition and outcome adjudication? "Unknown / not yet assessed" is valid.
+
+  - type: checkboxes
+    id: acknowledgements
+    attributes:
+      label: Public-issue acknowledgements
+      options:
+        - label: I have not included restricted data, credentials, participant information, unpublished results, or private access details.
+          required: true
+        - label: I understand that a feasibility review does not create an admitted episode or imply scientific endorsement.
+          required: true
+        - label: I am authorized to make this metadata-only proposal, or I have clearly stated where custodian authorization is still needed.
+          required: true

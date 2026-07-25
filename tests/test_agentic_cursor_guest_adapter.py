@@ -602,7 +602,7 @@ print("2026.07.09-a3815c0")
 
 
 def test_exact_installed_cursor_wrapper_identity_is_measurable_without_provider_call() -> None:
-    executable = Path('/Users/matthew.zhao/.local/share/cursor-agent/versions/2026.07.09-a3815c0/cursor-agent')
+    executable = Path.home() / '.local/share/cursor-agent/versions/2026.07.09-a3815c0/cursor-agent'
     if not executable.exists():
         pytest.skip('the pinned local Cursor Agent wrapper is not installed')
 

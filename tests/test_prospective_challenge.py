@@ -377,11 +377,10 @@ class ProspectiveChallengeTest(unittest.TestCase):
 
             self.assertIn('blinded early-clinical vaccine regimens', prompt)
             self.assertIn('frozen pre-results protocol evidence', prompt)
-            self.assertIn('benchmark-defined composite advancement objective, not by clinical efficacy', prompt)
-            self.assertIn('clears the benchmark-defined multi-endpoint advancement threshold', prompt)
-            self.assertIn("divides each regimen's Day-91 point estimate by the concurrent control", prompt)
-            self.assertIn('then takes their equal-weight geometric mean', prompt)
-            self.assertIn('A composite of at least 8 clears the binary threshold', prompt)
+            self.assertIn('episode-defined proxy advancement objective, not by clinical efficacy', prompt)
+            self.assertIn('clears the episode-declared threshold', prompt)
+            self.assertIn('Apply only the endpoint horizon, control normalization, aggregation', prompt)
+            self.assertIn('threshold, and grade bins stated in the visible episode evidence', prompt)
             self.assertIn('infer unshown results', prompt)
 
     def test_trusted_admission_gate_binds_complete_case_and_split_inventories(self) -> None:

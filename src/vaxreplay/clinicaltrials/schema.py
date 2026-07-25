@@ -30,6 +30,8 @@ AACT_SLICE_RECEIPT_SCHEMA_VERSION = 'vaxreplay.aact-slice-receipt.v0.1'
 AACT_EPISODE_SPEC_SCHEMA_VERSION = 'vaxreplay.aact-early-clinical-spec.v0.1'
 AACT_PRIVATE_AUDIT_SCHEMA_VERSION = 'vaxreplay.aact-early-clinical-audit.v0.1'
 AACT_ADAPTER_ID = 'aact-early-clinical-arm-prioritization-v0.1'
+# Public reference semantics only: this fixed rubric is contamination-exposed and cannot define a
+# hidden commercial or headline evaluation.
 AACT_RUBRIC_VERSION = 'aact-day-point-estimate-placebo-geomean-v1'
 EARLY_CLINICAL_TASK = 'early_clinical_arm_prioritization'
 

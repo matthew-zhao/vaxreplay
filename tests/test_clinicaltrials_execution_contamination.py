@@ -51,10 +51,10 @@ def _case():
     context = ExecutionTaskContext(
         episode_id='execution-dev-00112233445566778899aabb',
         target_trial_id='trial-target',
-        decision_snapshot_id='aact-2020-02-01',
-        anchor_date=date(2020, 2, 1),
-        label_snapshot_id='aact-2024-02-01',
-        label_archive_date=date(2024, 2, 1),
+        decision_snapshot_id='aact-2020-03-02',
+        anchor_date=date(2020, 3, 2),
+        label_snapshot_id='aact-2024-03-02',
+        label_archive_date=date(2024, 3, 2),
         planned_enrollment=100,
         planned_primary_completion_date=date(2021, 1, 1),
         enrollment_ratio_spec=ContinuousForecastSpec(
@@ -395,7 +395,7 @@ def test_complete_case_manifest_and_system_probe_keep_one_fixed_denominator() ->
         public_surface_sha256=risk.public_surface_sha256,
     )
     strata = build_execution_contamination_strata_manifest(
-        manifest_id='aact-real-131-contamination-strata-v0.1',
+        manifest_id='fictional-conformance-contamination-strata-v0.1',
         case_universe=(universe,),
         case_risks=(risk,),
     )

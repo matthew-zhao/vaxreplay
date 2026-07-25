@@ -6,5 +6,5 @@ The three candidate identifiers are opaque fictional antigen targets. The eviden
 
 `ev-future-canary` is intentionally collected before the decision cutoff but released afterward. A correct public view excludes it based on `available_at`, not `collected_at`.
 
-License identifier: `synthetic-internal-test-data`. There are no upstream data sources.
-
+License identifier: `CC-BY-4.0`. Retain the attribution specified in the repository
+`DATA_LICENSES.md`. There are no upstream data sources.

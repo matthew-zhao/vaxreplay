@@ -73,7 +73,7 @@ class IedbRawSchemaTest(unittest.TestCase):
         value = json.loads((_fixture_root() / 'snapshot_decision' / 'snapshot.json').read_text(encoding='utf-8'))
         value['synthetic'] = False
 
-        with self.assertRaises(ValidationError):
+        with self.assertRaisesRegex(ValidationError, 'cannot identify the source as fictional or synthetic'):
             IedbSnapshotManifest.model_validate_json(json.dumps(value))
 
 

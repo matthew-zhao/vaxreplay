@@ -206,10 +206,10 @@ controls. The source-worker supply-chain verifier closes retained-byte and order
 consistency, but does not attest the builder or running host. The general model-runner Docker
 backend remains development-tier. The Firecracker task and qualification guests have produced
 local nested-KVM development evidence, but the managed end-to-end path and dedicated-host release
-deployment remain unqualified; see
-`docs/sealed_runner.md` and `docs/production_agentic_runner.md` for the remaining deployment gates.
-These controls make the repository Tier-A-capable; they do not make any checked-in fixture,
-capture, cohort, run, or dataset Tier A.
+deployment remain unqualified; see the [sealed-runner guide](sealed_runner.md) and
+[Agentic Replay protocol](agentic_replay_v1.md) for the remaining deployment gates.
+These controls are building blocks for a future Tier A deployment; the repository alone is not
+Tier-A-capable, and no checked-in fixture, capture, cohort, run, or dataset is Tier A.
 
 ## Open risks
 

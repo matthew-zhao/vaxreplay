@@ -80,9 +80,9 @@ def _study(
 def _write_decision_zip(
     path: Path,
     *,
-    decision_anchor: date = date(2020, 2, 1),
+    decision_anchor: date = date(2020, 3, 2),
     include_second_study: bool = True,
-    first_lead_sponsor: str = 'Moderna',
+    first_lead_sponsor: str = 'Fictional Biologics',
 ) -> None:
     studies = [
         _study('NCT00000001', title='SARS-CoV-2 vaccine safety and immunogenicity'),
@@ -104,7 +104,7 @@ def _write_decision_zip(
         ),
         _study('NCT00000006', title='Unrelated device feasibility study'),
     ]
-    if decision_anchor != date(2020, 2, 1):
+    if decision_anchor != date(2020, 3, 2):
         for study in studies:
             study['study_first_posted_date'] = f'{decision_anchor.year - 1}-06-01'
             study['primary_completion_date'] = f'{decision_anchor.year + 1}-06-01'
@@ -114,7 +114,7 @@ def _write_decision_zip(
         {
             'nct_id': 'NCT00000001',
             'intervention_type': 'Biological',
-            'name': 'mRNA-1273',
+            'name': 'Fictional RNA vaccine A',
             'description': 'A candidate vaccine with a quoted "sequence"\nand a second line.',
         },
         {
@@ -169,9 +169,19 @@ def _write_decision_zip(
             'lead_or_collaborator': 'lead',
             'name': first_lead_sponsor,
         },
-        {'nct_id': 'NCT00000002', 'agency_class': 'Industry', 'lead_or_collaborator': 'lead', 'name': 'Sanofi'},
+        {
+            'nct_id': 'NCT00000002',
+            'agency_class': 'Industry',
+            'lead_or_collaborator': 'lead',
+            'name': 'Fictional Vaccine Sponsor B',
+        },
         {'nct_id': 'NCT00000003', 'agency_class': 'Other', 'lead_or_collaborator': 'lead', 'name': 'Cancer Center'},
-        {'nct_id': 'NCT00000004', 'agency_class': 'Industry', 'lead_or_collaborator': 'lead', 'name': 'BMS'},
+        {
+            'nct_id': 'NCT00000004',
+            'agency_class': 'Industry',
+            'lead_or_collaborator': 'lead',
+            'name': 'Fictional Oncology Sponsor D',
+        },
         {'nct_id': 'NCT00000005', 'agency_class': 'Other', 'lead_or_collaborator': 'lead', 'name': 'Registry'},
         {'nct_id': 'NCT00000006', 'agency_class': 'Other', 'lead_or_collaborator': 'lead', 'name': 'Device Lab'},
     ]
@@ -263,9 +273,9 @@ class AactExecutionAdapterTests(unittest.TestCase):
 
             build = build_aact_execution_cohort(
                 decision_archive=decision_zip,
-                decision_archive_date=date(2020, 2, 1),
+                decision_archive_date=date(2020, 3, 2),
                 label_archive=label_zip,
-                label_archive_date=date(2024, 2, 1),
+                label_archive_date=date(2024, 3, 2),
                 output_root=output,
                 synthetic_test_only=True,
             )
@@ -329,17 +339,17 @@ class AactExecutionAdapterTests(unittest.TestCase):
 
             first = build_aact_execution_cohort(
                 decision_archive=decision_zip,
-                decision_archive_date=date(2020, 2, 1),
+                decision_archive_date=date(2020, 3, 2),
                 label_archive=label_zip,
-                label_archive_date=date(2024, 2, 1),
+                label_archive_date=date(2024, 3, 2),
                 output_root=root / 'first',
                 synthetic_test_only=True,
             )
             second = build_aact_execution_cohort(
                 decision_archive=decision_zip,
-                decision_archive_date=date(2020, 2, 1),
+                decision_archive_date=date(2020, 3, 2),
                 label_archive=label_zip,
-                label_archive_date=date(2024, 2, 1),
+                label_archive_date=date(2024, 3, 2),
                 output_root=root / 'second',
                 synthetic_test_only=True,
             )
@@ -348,7 +358,7 @@ class AactExecutionAdapterTests(unittest.TestCase):
             self.assertEqual(tuple(label.nct_id for label in first.labels.labels), ('NCT00000001', 'NCT00000002'))
             self.assertNotIn('NCT99999999', {row.nct_id for row in first.labels.outcome_rows})
 
-    def test_cli_defaults_target_2020_to_2024_and_refuses_existing_output(self) -> None:
+    def test_cli_requires_explicit_dates_and_refuses_existing_output(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             decision_zip = root / 'decision.zip'
@@ -362,8 +372,12 @@ class AactExecutionAdapterTests(unittest.TestCase):
                     [
                         '--decision-archive',
                         str(decision_zip),
+                        '--decision-archive-date',
+                        '2020-03-02',
                         '--label-archive',
                         str(label_zip),
+                        '--label-archive-date',
+                        '2024-03-02',
                         '--synthetic-test-only',
                         '--output-root',
                         str(output),
@@ -374,9 +388,9 @@ class AactExecutionAdapterTests(unittest.TestCase):
             with self.assertRaises(FileExistsError):
                 build_aact_execution_cohort(
                     decision_archive=decision_zip,
-                    decision_archive_date=date(2020, 2, 1),
+                    decision_archive_date=date(2020, 3, 2),
                     label_archive=label_zip,
-                    label_archive_date=date(2024, 2, 1),
+                    label_archive_date=date(2024, 3, 2),
                     output_root=output,
                     synthetic_test_only=True,
                 )
@@ -390,9 +404,9 @@ class AactExecutionAdapterTests(unittest.TestCase):
             _write_label_zip(label_zip, include_present_but_blank=True)
             build = build_aact_execution_cohort(
                 decision_archive=decision_zip,
-                decision_archive_date=date(2020, 2, 1),
+                decision_archive_date=date(2020, 3, 2),
                 label_archive=label_zip,
-                label_archive_date=date(2024, 2, 1),
+                label_archive_date=date(2024, 3, 2),
                 output_root=root / 'cohort',
                 synthetic_test_only=True,
             )
@@ -413,7 +427,7 @@ class AactExecutionAdapterTests(unittest.TestCase):
             with self.assertRaisesRegex(AactExecutionAdapterError, r'exactly \+48 calendar months'):
                 build_aact_execution_cohort(
                     decision_archive=decision_zip,
-                    decision_archive_date=date(2020, 2, 1),
+                    decision_archive_date=date(2020, 3, 2),
                     label_archive=label_zip,
                     label_archive_date=date(2024, 3, 1),
                     output_root=root / 'cohort',
@@ -430,9 +444,9 @@ class AactExecutionAdapterTests(unittest.TestCase):
             with self.assertRaisesRegex(AactExecutionAdapterError, 'provide exactly one source mode'):
                 build_aact_execution_cohort(
                     decision_archive=decision_zip,
-                    decision_archive_date=date(2020, 2, 1),
+                    decision_archive_date=date(2020, 3, 2),
                     label_archive=label_zip,
-                    label_archive_date=date(2024, 2, 1),
+                    label_archive_date=date(2024, 3, 2),
                     output_root=root / 'cohort',
                 )
 

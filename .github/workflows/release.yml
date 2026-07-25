@@ -1,0 +1,212 @@
+name: Build alpha release candidate
+
+on:
+  push:
+    tags:
+      - v0.1.0-alpha.1
+  workflow_dispatch:
+    inputs:
+      commit:
+        description: Full 40-character public main-branch commit to build
+        required: true
+        type: string
+
+concurrency:
+  group: alpha-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Validate and build without signing authority
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    env:
+      RELEASE_COMMIT: ${{ github.event_name == 'workflow_dispatch' && inputs.commit || github.sha }}
+      BUNDLE: ${{ runner.temp }}/vaxreplay-v0.1.0-alpha.1
+      UNSIGNED_ARTIFACT: vaxreplay-v0.1.0-alpha.1-unsigned-${{ github.run_id }}-${{ github.run_attempt }}
+      WORKFLOW_SHA: ${{ github.workflow_sha }}
+    steps:
+      - name: Bind a manual candidate to public main
+        if: github.event_name == 'workflow_dispatch'
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "refs/heads/main"
+          test "$RELEASE_COMMIT" = "$GITHUB_SHA"
+          test "$WORKFLOW_SHA" = "$RELEASE_COMMIT"
+
+      - name: Bind a tag build to the exact release tag
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "refs/tags/v0.1.0-alpha.1"
+          test "$WORKFLOW_SHA" = "$RELEASE_COMMIT"
+
+      - name: Check out the exact public commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.commit || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python 3.12.13
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12.13'
+
+      - name: Set up pinned uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9
+        with:
+          version: 0.11.7
+          enable-cache: false
+
+      - name: Run the complete public validation contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -c 'import sys; assert sys.version_info[:3] == (3, 12, 13)'
+          uv sync --locked --extra dev
+          uv run ruff format --check .
+          uv run ruff check .
+          uv run ty check --exclude src/vaxreplay/integrations src/vaxreplay
+          uv run pytest -q -p no:cacheprovider
+          uv run python scripts/smoke_test.py
+
+      - name: Build and independently compare package artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=(
+            --source .
+            --commit "$RELEASE_COMMIT"
+            --output "$BUNDLE"
+            --uv "$(command -v uv)"
+          )
+          if [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
+            args+=(--require-tag)
+          fi
+          python scripts/build_alpha_release_bundle.py "${args[@]}"
+
+      - name: Clean-install the exact locked runtime and built wheel
+        shell: bash
+        run: |
+          set -euo pipefail
+          clean_env="$RUNNER_TEMP/vaxreplay-alpha-clean-install"
+          requirements="$RUNNER_TEMP/vaxreplay-alpha-runtime-requirements.txt"
+          uv export \
+            --locked \
+            --no-dev \
+            --no-emit-project \
+            --format requirements.txt \
+            --output-file "$requirements"
+          uv venv --python "$(command -v python)" "$clean_env"
+          uv pip install \
+            --python "$clean_env/bin/python" \
+            --require-hashes \
+            --only-binary :all: \
+            --requirements "$requirements"
+          uv pip install \
+            --python "$clean_env/bin/python" \
+            --no-deps \
+            "$BUNDLE/vaxreplay-0.1.0a1-py3-none-any.whl"
+          uv pip check --python "$clean_env/bin/python"
+          "$clean_env/bin/python" -c \
+            'import vaxreplay; assert vaxreplay.__version__ == "0.1.0a1"'
+          commands=(
+            vaxreplay
+            vaxreplay-iedb
+            vaxreplay-feasibility
+            vaxreplay-prospective
+            vaxreplay-runner
+            vaxreplay-ops
+            vaxreplay-release-readiness
+          )
+          for command in "${commands[@]}"; do
+            "$clean_env/bin/$command" --help >/dev/null
+          done
+
+      - name: Upload the validated unsigned candidate for signing
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: ${{ env.UNSIGNED_ARTIFACT }}
+          path: ${{ runner.temp }}/vaxreplay-v0.1.0-alpha.1/
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 1
+
+  attest:
+    name: Attest the validated candidate without executing repository code
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+      artifact-metadata: write
+    env:
+      BUNDLE: ${{ runner.temp }}/vaxreplay-v0.1.0-alpha.1
+      UNSIGNED_ARTIFACT: vaxreplay-v0.1.0-alpha.1-unsigned-${{ github.run_id }}-${{ github.run_attempt }}
+    steps:
+      - name: Download the validated unsigned candidate
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: ${{ env.UNSIGNED_ARTIFACT }}
+          path: ${{ runner.temp }}/vaxreplay-v0.1.0-alpha.1
+
+      - name: Verify transferred payload checksums
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f "$BUNDLE/SHA256SUMS"
+          (
+            cd "$BUNDLE"
+            sha256sum --check --strict SHA256SUMS
+          )
+
+      - name: Attest checksummed release payloads
+        id: provenance
+        uses: actions/attest@f7c74d28b9d84cb8768d0b8ca14a4bac6ef463e6
+        with:
+          subject-checksums: ${{ runner.temp }}/vaxreplay-v0.1.0-alpha.1/SHA256SUMS
+
+      - name: Attest the checksum manifest
+        id: checksums
+        uses: actions/attest@f7c74d28b9d84cb8768d0b8ca14a4bac6ef463e6
+        with:
+          subject-path: ${{ runner.temp }}/vaxreplay-v0.1.0-alpha.1/SHA256SUMS
+
+      - name: Attest the wheel SBOM
+        id: sbom
+        uses: actions/attest@f7c74d28b9d84cb8768d0b8ca14a4bac6ef463e6
+        with:
+          subject-path: ${{ runner.temp }}/vaxreplay-v0.1.0-alpha.1/vaxreplay-0.1.0a1-py3-none-any.whl
+          sbom-path: ${{ runner.temp }}/vaxreplay-v0.1.0-alpha.1/vaxreplay-v0.1.0-alpha.1.spdx.json
+
+      - name: Retain all generated Sigstore bundles with the candidate
+        shell: bash
+        env:
+          PROVENANCE_BUNDLE: ${{ steps.provenance.outputs.bundle-path }}
+          CHECKSUMS_BUNDLE: ${{ steps.checksums.outputs.bundle-path }}
+          SBOM_BUNDLE: ${{ steps.sbom.outputs.bundle-path }}
+        run: |
+          set -euo pipefail
+          test -f "$PROVENANCE_BUNDLE"
+          test -f "$CHECKSUMS_BUNDLE"
+          test -f "$SBOM_BUNDLE"
+          cp -- "$PROVENANCE_BUNDLE" \
+            "$BUNDLE/vaxreplay-v0.1.0-alpha.1-payloads-provenance.sigstore.json"
+          cp -- "$CHECKSUMS_BUNDLE" \
+            "$BUNDLE/vaxreplay-v0.1.0-alpha.1-checksums-provenance.sigstore.json"
+          cp -- "$SBOM_BUNDLE" \
+            "$BUNDLE/vaxreplay-v0.1.0-alpha.1-sbom.sigstore.json"
+
+      - name: Upload the complete candidate
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: vaxreplay-v0.1.0-alpha.1
+          path: ${{ runner.temp }}/vaxreplay-v0.1.0-alpha.1/
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30

@@ -138,9 +138,9 @@ def _rule(family_id: str, *terms: str) -> TargetFamilyRule:
     return TargetFamilyRule(family_id=family_id, terms=tuple(sorted(terms)))
 
 
-# These deliberately broad families trade statistical independence for leakage isolation.  For
-# example, all dengue, Zika, and yellow-fever cases remain together in the flavivirus family, and
-# all Ebola/Marburg cases remain together in the filovirus family.
+# These deliberately broad families trade statistical independence for leakage isolation. They
+# are public, contamination-exposed reference semantics—not an undisclosed selection policy for a
+# held-out or commercial cohort. Such a cohort needs a newly frozen organizer-private policy.
 TARGET_FAMILY_RULES = (
     _rule(
         'alphavirus',

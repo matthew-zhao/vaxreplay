@@ -108,8 +108,8 @@ organizer-side quality-control system. Two or more pinned judges must cite exact
 outputs, prompt/config/model commitments, calibration results, and protected comparisons remain in
 the private release. The public admission commits the common audit policy and complete manifest
 hash. The release builder accepts only passing cases and independently recomputes the exact `full`
-model-facing prompt bytes. See [contamination-audited historical
-replay](contamination_audit.md).
+model-facing prompt bytes. See the [threat model](threat_model.md) for the limits of contamination
+controls.
 
 A passing audit means `no_signal_detected_under_pinned_screen`; it does not prove that a submitted
 model has not memorized the later result. Model-specific recall and reidentification probes are a

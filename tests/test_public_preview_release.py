@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import hashlib
+import json
 from pathlib import Path
 
 import pytest
@@ -12,10 +14,18 @@ from vaxreplay.public_preview import (
 
 
 def _policy() -> PublicPreviewPolicy:
+    approved_paths = (
+        'README.md',
+        'pyproject.toml',
+        'src/vaxreplay/__init__.py',
+    )
+    approved_paths_sha256 = hashlib.sha256(''.join(f'{path}\n' for path in approved_paths).encode('utf-8')).hexdigest()
     return PublicPreviewPolicy.model_validate(
         {
-            'schema_version': 1,
+            'schema_version': 2,
             'release_name': 'v0.1.0-alpha.1',
+            'approved_static_path_count': len(approved_paths),
+            'approved_static_paths_sha256': approved_paths_sha256,
             'mapped_files': [{'source': 'template.md', 'destination': 'README.md'}],
             'include_files': ['pyproject.toml'],
             'optional_files': ['LICENSE'],
@@ -71,6 +81,10 @@ def test_draft_build_is_allowlisted_marked_and_manifested(tmp_path: Path) -> Non
     manifest = (output / 'MANIFEST.sha256').read_text(encoding='utf-8')
     assert 'README.md' in manifest
     assert 'DRAFT-NOT-FOR-DISTRIBUTION.md' in manifest
+    build_info = json.loads((output / 'BUILD-INFO.json').read_text(encoding='utf-8'))
+    assert build.static_export_path_count == 3
+    assert build.static_export_paths_sha256 == build_info['static_export_paths_sha256']
+    assert build.private_export_policy_canonical_sha256 == build_info['private_export_policy_canonical_sha256']
 
 
 def test_final_build_requires_clean_source_and_release_metadata(tmp_path: Path) -> None:
@@ -126,3 +140,43 @@ def test_build_rejects_forbidden_content_and_existing_output(tmp_path: Path) -> 
             source_revision='a' * 40,
             source_dirty=True,
         )
+
+
+def test_build_rejects_unreviewed_file_in_included_tree(tmp_path: Path) -> None:
+    source = _source(tmp_path)
+    (source / 'src' / 'vaxreplay' / 'new_module.py').write_text('VALUE = 3\n', encoding='utf-8')
+    output = tmp_path / 'path-drift-output'
+
+    with pytest.raises(PublicPreviewError, match='static path inventory differs') as error:
+        build_public_preview(
+            source_root=source,
+            output_root=output,
+            policy=_policy(),
+            draft=True,
+            source_revision='a' * 40,
+            source_dirty=True,
+        )
+
+    assert 'actual count=4' in str(error.value)
+    assert not output.exists()
+
+
+def test_build_rejects_symlinked_included_tree(tmp_path: Path) -> None:
+    source = _source(tmp_path)
+    tree = source / 'src' / 'vaxreplay'
+    external_tree = tmp_path / 'external-vaxreplay'
+    tree.rename(external_tree)
+    tree.symlink_to(external_tree, target_is_directory=True)
+    output = tmp_path / 'symlink-output'
+
+    with pytest.raises(PublicPreviewError, match='symlinks are not allowed'):
+        build_public_preview(
+            source_root=source,
+            output_root=output,
+            policy=_policy(),
+            draft=True,
+            source_revision='a' * 40,
+            source_dirty=True,
+        )
+
+    assert not output.exists()

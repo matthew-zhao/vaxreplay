@@ -65,7 +65,7 @@ from vaxreplay.sources.immport import (
 )
 
 _SOURCE_ID = 'immport:prospective-shared-data'
-_STUDY = 'SDY1234'
+_STUDY = 'SDY00000000'
 _CAPTURED_AT = datetime(2026, 6, 27, 12, tzinfo=timezone.utc)
 _OPENAPI_URL = 'https://www.immport.org/data/query/v3/api-docs'
 
@@ -262,7 +262,7 @@ def _fixture(
             'armAccession': 'ARM1',
             'studyAccession': _STUDY,
             'description': (
-                'Low-dose vaccine regimen from SDY1234 / NCT12345678; '
+                'Low-dose vaccine regimen from SDY00000000 / NCT12345678; '
                 'see https://example.org/result and 10.1234/result-canary'
             ),
             'name': 'Low dose',
@@ -1101,9 +1101,9 @@ def test_adapter_rejects_post_cutoff_capture() -> None:
 @pytest.mark.parametrize(
     'episode_id',
     (
-        'episode-SDY1234',
+        'episode-SDY00000000',
         'episode-NCT12345678',
-        'episodeSDY1234suffix',
+        'episodeSDY00000000suffix',
         'prefixNCT12345678suffix',
         'episode-10.1234/result',
         'episode-https://example.org/result',

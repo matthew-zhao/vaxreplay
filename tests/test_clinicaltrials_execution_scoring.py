@@ -55,7 +55,7 @@ def _byte_span(text: str, needle: str) -> tuple[int, int]:
 def _document(body: str = _BODY) -> CutoffDocument:
     return CutoffDocument(
         document_id='registry-record',
-        available_on=date(2020, 2, 1),
+        available_on=date(2020, 3, 2),
         body=body,
         body_sha256=_body_sha256(body),
     )
@@ -78,10 +78,10 @@ def _context(*, with_fact: bool = True) -> ExecutionTaskContext:
     return ExecutionTaskContext(
         episode_id='execution-dev-001',
         target_trial_id='trial-001',
-        decision_snapshot_id='aact-2020-02-01',
-        anchor_date=date(2020, 2, 1),
-        label_snapshot_id='aact-2024-02-01',
-        label_archive_date=date(2024, 2, 1),
+        decision_snapshot_id='aact-2020-03-02',
+        anchor_date=date(2020, 3, 2),
+        label_snapshot_id='aact-2024-03-02',
+        label_archive_date=date(2024, 3, 2),
         planned_enrollment=100,
         planned_primary_completion_date=date(2021, 1, 1),
         enrollment_ratio_spec=ContinuousForecastSpec(

@@ -8,16 +8,16 @@
   "outcome_as_of": "2020-06-29T00:00:00Z",
   "portfolio_size": 1,
   "candidates": [
-    {"candidate_id": "cand-beta", "structure_iri": "IEDB_EPITOPE:900002"},
-    {"candidate_id": "cand-alpha", "structure_iri": "IEDB_EPITOPE:900001"}
+    {"candidate_id": "cand-beta", "structure_iri": "VAXREPLAY_FIXTURE_EPITOPE:BETA"},
+    {"candidate_id": "cand-alpha", "structure_iri": "VAXREPLAY_FIXTURE_EPITOPE:ALPHA"}
   ],
   "evidence_endpoints": ["tcell_search", "bcell_search"],
   "label_endpoint": "tcell_search",
-  "label_reference_iri": "IEDB_REFERENCE:899999",
+  "label_reference_iri": "VAXREPLAY_FIXTURE_REFERENCE:HELD-OUT-CELLULAR",
   "label_assay_iri": "OBI:1110059",
   "label_mhc_restriction": "HLA-A*02:01",
   "label_host_organism_iri": "NCBITaxon:9606",
-  "label_source_organism_iri": "NCBITaxon:999001",
+  "label_source_organism_iri": "VAXREPLAY_FIXTURE_TAXON:VIRUS",
   "min_positive_candidates": 1,
   "min_negative_candidates": 1,
   "reward_version": "v1.0",

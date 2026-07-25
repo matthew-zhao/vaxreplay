@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "release_name": "v0.1.0-alpha.1",
+  "project": {
+    "name": "vaxreplay",
+    "version": "0.1.0a1",
+    "license_expression": "Apache-2.0",
+    "purl": "pkg:pypi/vaxreplay@0.1.0a1"
+  },
+  "review": {
+    "status": "reviewed-for-alpha-inventory",
+    "as_of": "2026-07-24",
+    "method": "SPDX expressions were normalized from upstream project license declarations and checked against the exact runtime closure in uv.lock.",
+    "legal_advice": false,
+    "maintainer_release_approval_required": true
+  },
+  "packages": [
+    {
+      "name": "annotated-types",
+      "version": "0.7.0",
+      "license_expression": "MIT",
+      "homepage": "https://github.com/annotated-types/annotated-types",
+      "purl": "pkg:pypi/annotated-types@0.7.0",
+      "review_note": "Permissive MIT license."
+    },
+    {
+      "name": "cffi",
+      "version": "2.1.0",
+      "license_expression": "MIT-0",
+      "homepage": "https://cffi.readthedocs.io/",
+      "purl": "pkg:pypi/cffi@2.1.0",
+      "review_note": "Permissive MIT No Attribution (MIT-0) license."
+    },
+    {
+      "name": "cryptography",
+      "version": "49.0.0",
+      "license_expression": "Apache-2.0 OR BSD-3-Clause",
+      "homepage": "https://github.com/pyca/cryptography",
+      "purl": "pkg:pypi/cryptography@49.0.0",
+      "review_note": "Upstream offers a choice of Apache-2.0 or BSD-3-Clause."
+    },
+    {
+      "name": "pycparser",
+      "version": "3.0",
+      "license_expression": "BSD-3-Clause",
+      "homepage": "https://github.com/eliben/pycparser",
+      "purl": "pkg:pypi/pycparser@3.0",
+      "review_note": "Permissive BSD-3-Clause license."
+    },
+    {
+      "name": "pydantic",
+      "version": "2.13.4",
+      "license_expression": "MIT",
+      "homepage": "https://github.com/pydantic/pydantic",
+      "purl": "pkg:pypi/pydantic@2.13.4",
+      "review_note": "Permissive MIT license."
+    },
+    {
+      "name": "pydantic-core",
+      "version": "2.46.4",
+      "license_expression": "MIT",
+      "homepage": "https://github.com/pydantic/pydantic-core",
+      "purl": "pkg:pypi/pydantic-core@2.46.4",
+      "review_note": "Permissive MIT license."
+    },
+    {
+      "name": "typing-extensions",
+      "version": "4.16.0",
+      "license_expression": "PSF-2.0",
+      "homepage": "https://github.com/python/typing_extensions",
+      "purl": "pkg:pypi/typing-extensions@4.16.0",
+      "review_note": "Python Software Foundation License 2.0."
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.2",
+      "license_expression": "MIT",
+      "homepage": "https://github.com/pydantic/typing-inspection",
+      "purl": "pkg:pypi/typing-inspection@0.4.2",
+      "review_note": "Permissive MIT license."
+    }
+  ]
+}

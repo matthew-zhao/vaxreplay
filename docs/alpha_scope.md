@@ -24,9 +24,9 @@ an official benchmark run.
 
 The public technical preview must not contain:
 
-- the 131 real AACT development workspaces;
+- the real AACT development workspaces;
 - real task identities selected for evaluation;
-- private gold, organizer mappings, exact cohort inventories, or scorer secrets;
+- real or admitted held-out gold, organizer mappings, exact cohort inventories, or scorer secrets;
 - raw IEDB, AACT/ClinicalTrials.gov, ImmPort, VaxSeer, or FluSelect source slices;
 - customer or model submissions, raw provider responses, or private run logs;
 - provider credentials, HMAC keys, databases, ledgers, VM disks, kernels, or root filesystems;
@@ -37,6 +37,15 @@ The current AACT development cohort forecasts registry-observed trial execution.
 measure biological efficacy, immune response, safety, clinical utility, candidate quality, or
 end-to-end vaccine-development capability.
 
+Previously published development descriptions exposed enough task structure to contaminate the
+existing AACT pilot and development cohort. Removing those fingerprints from the current release tree
+limits accidental reuse but cannot restore secrecy. Those cases are permanently development-only
+and cannot support held-out, commercial, or headline scores.
+
+The checked-in AACT selection, target-family taxonomy, and clinical-rubric code is public reference
+semantics, not a secret evaluation policy. A future held-out cohort must use newly frozen,
+organizer-private task selection and task-specific configuration.
+
 ## Release boundary
 
 The technical preview will be produced as a fresh allowlisted export, not by copying the development
@@ -44,9 +53,11 @@ working tree and not by publishing its Git history. The export must be built fro
 source revision and independently inspected before release.
 
 Only project code, approved documentation, ordinary examples, unit tests, and explicitly fictional
-fixtures may enter the export. Generated `build/` artifacts, ignored `private/` material, organizer
-state, real cohort data, branded model-result receipts, and raw development evidence are denied by
-default.
+fixtures may enter the export. Some fictional conformance fixtures deliberately include
+model-hidden labels under directories named `private/`; those labels are test data, not held-out
+benchmark gold. Generated `build/` artifacts, ignored development-repository `private/` material,
+organizer state, real cohort data, branded model-result receipts, and raw development evidence are
+denied by default.
 
 The release archive must pass:
 
@@ -66,10 +77,13 @@ artifact, or evidence that a model can safely develop a vaccine.
 
 ## Commercial boundary
 
-Real held-out tasks, private gold, identity mappings, and managed execution remain outside the
-public preview. A future paid design-partner pilot may evaluate customer-approved systems in a
-private environment under a separately frozen protocol, rights review, retention policy, and
-publication agreement.
+Real held-out tasks and gold, identity mappings, and managed execution remain outside the public
+preview. A future paid design-partner pilot may evaluate customer-approved systems in a private
+environment under a separately frozen protocol, rights review, retention policy, and publication
+agreement.
+
+That pilot must use a newly selected private cohort frozen before case-specific structure is
+exposed; it cannot reuse the contamination-exposed development cases as hidden evaluation data.
 
 Results apply only to the exact cohort, model route, harness, resource budget, and execution policy
 that produced them. No score should be generalized to vaccine development without an independently

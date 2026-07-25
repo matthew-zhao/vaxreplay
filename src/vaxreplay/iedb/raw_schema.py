@@ -184,6 +184,8 @@ class IedbSnapshotManifest(StrictModel):
                 raise ValueError('real snapshots require explicit third-party-rights review')
             if 'IEDB' not in self.citation:
                 raise ValueError('real snapshot citation must explicitly attribute IEDB')
+            if re.search(r'(?i)\b(?:fictional|synthetic|test fixture)\b|not IEDB data', self.citation):
+                raise ValueError('real snapshot citation cannot identify the source as fictional or synthetic')
         return self
 
 

@@ -222,8 +222,16 @@ def _input(*, tls_receipt_override: bytes | None = None, metrics_after: bytes | 
     )
     page = canonical_json_bytes(
         [
-            {'reference_iri': 'PMID:1', 'structure_iri': 'IEDB_EPITOPE:1', 'tcell_id': 1},
-            {'reference_iri': 'PMID:2', 'structure_iri': 'IEDB_EPITOPE:2', 'tcell_id': 2},
+            {
+                'reference_iri': 'VAXREPLAY_FIXTURE_REFERENCE:ROW-1',
+                'structure_iri': 'VAXREPLAY_FIXTURE_EPITOPE:ROW-1',
+                'tcell_id': 1,
+            },
+            {
+                'reference_iri': 'VAXREPLAY_FIXTURE_REFERENCE:ROW-2',
+                'structure_iri': 'VAXREPLAY_FIXTURE_EPITOPE:ROW-2',
+                'tcell_id': 2,
+            },
         ]
     )
     artifacts = (
@@ -374,48 +382,48 @@ def _antigen_adapter_fixture():
     )
     rows = [
         {
-            'parent_source_antigen_iri': 'UNIPROT:P00001',
+            'parent_source_antigen_iri': 'VAXREPLAY_FIXTURE_PROTEIN:ALPHA',
             'parent_source_antigen_name': 'Surface protein one',
             'qualitative_measure': 'Positive',
-            'reference_iri': 'PMID:1',
-            'source_organism_iri': 'NCBITAXON:999',
+            'reference_iri': 'VAXREPLAY_FIXTURE_REFERENCE:ROW-1',
+            'source_organism_iri': 'VAXREPLAY_FIXTURE_TAXON:TARGET',
             'source_organism_name': 'Prospective pathogen',
-            'structure_iri': 'IEDB_EPITOPE:1',
+            'structure_iri': 'VAXREPLAY_FIXTURE_EPITOPE:ROW-1',
             'tcell_id': 1,
         },
         {
-            'parent_source_antigen_iri': 'UNIPROT:P00002',
+            'parent_source_antigen_iri': 'VAXREPLAY_FIXTURE_PROTEIN:BETA',
             'parent_source_antigen_name': 'Surface protein two',
             'qualitative_measure': 'Negative',
-            'reference_iri': 'PMID:2',
-            'source_organism_iri': 'NCBITAXON:999',
+            'reference_iri': 'VAXREPLAY_FIXTURE_REFERENCE:ROW-2',
+            'source_organism_iri': 'VAXREPLAY_FIXTURE_TAXON:TARGET',
             'source_organism_name': 'Prospective pathogen',
-            'structure_iri': 'IEDB_EPITOPE:2',
+            'structure_iri': 'VAXREPLAY_FIXTURE_EPITOPE:ROW-2',
             'tcell_id': 2,
         },
         {
-            'parent_source_antigen_iri': 'UNIPROT:P00001',
+            'parent_source_antigen_iri': 'VAXREPLAY_FIXTURE_PROTEIN:ALPHA',
             'parent_source_antigen_name': 'Surface protein one',
             'qualitative_measure': 'Positive-Low',
-            'reference_iri': 'PMID:3',
-            'source_organism_iri': 'NCBITAXON:999',
+            'reference_iri': 'VAXREPLAY_FIXTURE_REFERENCE:ROW-3',
+            'source_organism_iri': 'VAXREPLAY_FIXTURE_TAXON:TARGET',
             'source_organism_name': 'Prospective pathogen',
-            'structure_iri': 'IEDB_EPITOPE:3',
+            'structure_iri': 'VAXREPLAY_FIXTURE_EPITOPE:ROW-3',
             'tcell_id': 3,
         },
         {
-            'parent_source_antigen_iri': 'UNIPROT:OTHER',
+            'parent_source_antigen_iri': 'VAXREPLAY_FIXTURE_PROTEIN:OUT-OF-SCOPE',
             'qualitative_measure': 'Positive',
-            'reference_iri': 'PMID:4',
-            'source_organism_iri': 'NCBITAXON:OTHER',
-            'structure_iri': 'IEDB_EPITOPE:4',
+            'reference_iri': 'VAXREPLAY_FIXTURE_REFERENCE:ROW-4',
+            'source_organism_iri': 'VAXREPLAY_FIXTURE_TAXON:OUT-OF-SCOPE',
+            'structure_iri': 'VAXREPLAY_FIXTURE_EPITOPE:ROW-4',
             'tcell_id': 4,
         },
         {
             'qualitative_measure': 'Positive',
-            'reference_iri': 'PMID:5',
-            'source_organism_iri': 'NCBITAXON:999',
-            'structure_iri': 'IEDB_EPITOPE:5',
+            'reference_iri': 'VAXREPLAY_FIXTURE_REFERENCE:ROW-5',
+            'source_organism_iri': 'VAXREPLAY_FIXTURE_TAXON:TARGET',
+            'structure_iri': 'VAXREPLAY_FIXTURE_EPITOPE:ROW-5',
             'tcell_id': 5,
         },
     ]
@@ -485,7 +493,7 @@ def _antigen_adapter_fixture():
         source_id=_SOURCE_ID,
         episode_id='prospective-antigen-001',
         decision_at=datetime(2026, 7, 15, tzinfo=timezone.utc),
-        target_source_organism_iris=('NCBITAXON:999',),
+        target_source_organism_iris=('VAXREPLAY_FIXTURE_TAXON:TARGET',),
         eligible_tables=(IedbAntigenTablePolicy(endpoint=IedbEndpoint.TCELL, id_field='tcell_id'),),
     )
     return adapter_input, adapter_policy
@@ -515,8 +523,8 @@ def test_antigen_adapter_enumerates_all_distinct_targets_without_top_n() -> None
     assert result.auxiliary_outputs is not None
     candidate_map = IedbAntigenCandidateMap.model_validate_json(result.auxiliary_outputs['iedb-antigen-candidate-map'])
     assert {item.parent_source_antigen_iri for item in candidate_map.candidates} == {
-        'UNIPROT:P00001',
-        'UNIPROT:P00002',
+        'VAXREPLAY_FIXTURE_PROTEIN:ALPHA',
+        'VAXREPLAY_FIXTURE_PROTEIN:BETA',
     }
     _normalize_adapter_result(
         result,

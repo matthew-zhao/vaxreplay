@@ -47,7 +47,7 @@ from vaxreplay.sources.immport_outcomes import (
 
 _T0 = datetime(2026, 7, 1, tzinfo=timezone.utc)
 _FIRST_SLOT = _T0 + timedelta(days=1)
-_STUDY = 'SDY1234'
+_STUDY = 'SDY00000000'
 _SOURCE = 'immport:science-contract-test'
 
 
@@ -65,7 +65,7 @@ def _registry(*, studies: tuple[ImmportStudyUniverseEntry, ...] | None = None):
                 reason_code='predeclared_eligible_study',
             ),
             ImmportStudyUniverseEntry(
-                study_accession='SDY9999',
+                study_accession='SDY00000001',
                 disposition='excluded',
                 reason_code='administrative_scope_exclusion',
             ),
@@ -135,7 +135,7 @@ def test_study_universe_rejects_post_selection_substitution_and_cherry_picking()
         _registry(
             studies=(
                 ImmportStudyUniverseEntry(
-                    study_accession='SDY9999',
+                    study_accession='SDY00000001',
                     disposition='selected',
                     reason_code='predeclared_eligible_study',
                 ),

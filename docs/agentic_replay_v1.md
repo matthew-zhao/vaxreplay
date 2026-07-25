@@ -63,10 +63,11 @@ Publication dates, database row dates, DOI metadata, PDF metadata, old URLs, and
 interval; strict admission requires the conservative upper bound to be no later than the task
 cutoff. If an interval crosses the cutoff, the source is quarantined.
 
-The current AACT RSV pilot is `source_attested_best_effort`. Its archive is labeled 2020-02-01, but
-the exact ZIP was retrieved and content-addressed in 2026 and the HTTP metadata is later. The pilot
-may exercise the workspace and runner contracts, but it must not be relabeled as a strict Tier B or
-hidden leaderboard case.
+Private AACT integration work has exercised the `source_attested_best_effort` profile with
+retrospectively retrieved bytes. Those development cases are not included here and cannot be
+relabeled as strict Tier B or hidden leaderboard cases. Previously public development descriptions
+also make those cases contamination-exposed, so they are permanently ineligible for held-out or
+commercial scoring.
 
 ## Workspace
 
@@ -207,10 +208,9 @@ cross-binds the worker, gateway, authenticated guest RPC session, workspace, pol
 route, timing, usage, and cost. The guest RPC exposes only bounded list/read/search/model/submit
 operations, records host-authoritative sequencing and exact retries, and signs its attempts,
 projected events, and final submission. The deterministic and attack-oriented unit tests do not
-boot Firecracker or make a live provider call on the macOS development machine. Separately, the
-clinical-v2 task guest completed one pinned real AACT-derived task and the qualification guest passed
-all seven drills on a local nested-Linux/KVM host; both results remain non-official and used no
-external provider/model.
+boot Firecracker or make a live provider call on the macOS development machine. Private
+development inputs have exercised the clinical task and qualification-drill paths locally, but the
+public preview contains no independently qualified deployment or official run.
 
 It intentionally cannot mint `official_benchmark` admission. The workspace-admission schema fixes
 `official_release_eligible = false` and `authenticated_release_seal_present = false`; even a
@@ -220,8 +220,7 @@ and gateway claims and now binds a separately authenticated brokered guest RPC s
 does not observe guest-local computation or direct scratch-disk writes, so complete tool-trace and
 official-release claims remain false. Dedicated-host Linux/KVM qualification, an independently authenticated
 release seal, authenticated contamination-judge traces, and externally committed verifier
-executables remain deployment work. See the
-[production Agentic runner guide](production_agentic_runner.md).
+executables remain deployment work. See the [sealed-runner guide](sealed_runner.md).
 
 The code is therefore suitable for deterministic local development and integration pilots. Codex
 CLI 0.144.3 now has a separate development guest adapter with a real multi-turn local-tool path,
@@ -229,38 +228,19 @@ but that adapter is not built into a pinned Linux disk or KVM-qualified. This is
 defensible public leaderboard execution service for Codex, Claude Code, Cursor, or other
 participant harnesses.
 
-## Real AACT integration artifact
+## Private integration boundary
 
-There is one unique real AACT case in three local organizer artifacts. The original `episode/` is a
-non-synthetic, privately scored one-shot pilot with a 2020 post-completion decision view and the
-recorded reference-run matrix. A second private-label-bearing/scorable build uses the earliest
-permanent archive containing the trial; it is pre-results but not pre-enrollment, and it has no
-separate reference-run matrix. Both are development-only and post-hoc, not admitted Tier B
-releases. The separate `agentic-v1/` artifact described below was compiled from the original raw
-decision slice and is intentionally unscored. Thus “zero admitted real episodes” does not mean that
-no real-data episode has been built; it means that the real case has not satisfied the
-historical-release gate.
+Private, non-distributed AACT development inputs have been used to exercise compiler, broker, and
+runner integration. No such input, task identity, source slice, task-specific structure, mapping,
+gold, or run receipt is part of this preview. The public code specifies interfaces and checks; it
+does not establish that any real case is temporally admitted, contamination-safe, scientifically
+valid, or suitable for a leaderboard.
 
-[`build_aact_agentic_v1_integration.py`](../scripts/build_aact_agentic_v1_integration.py) compiles
-the existing 2020 AACT decision slice into a real-data Agentic V1 workspace. The compiler admits
-exactly the six receipted raw text files, assigns secret-seed neutral source and candidate aliases,
-binds source-attested exact-byte proofs, and validates the resulting logical broker inventory. Its
-generated local `build/aact-early-clinical-real-pilot-v0/agentic-v1/STATUS.json` is the authoritative
-capability statement. Generated build artifacts are intentionally excluded from the source repository.
-
-This artifact supports a meaningful multi-file registry task: retrieve structured fields, join
-design groups to interventions, filter the older-adult experimental arms, reconstruct the
-dose-by-formulation cross-product, reconcile Day-91 immunogenicity measures, compute declared
-metrics, and cite exact UTF-8 spans. It does **not** support candidate ranking. The raw AACT files do
-not bind `candidate-001..009` to registry arms, and adding the old normalized evidence would cross
-the currently unverified derived-transformation boundary. The correct decision is therefore an
-explicit abstention.
-
-The surface also exposes the NCT identifier, sponsor/product strings, formulation names, registry
-row IDs, titles, and dates. It is highly reidentifiable and cannot control later outcomes recalled
-from model weights. It has no typed gold, scoring contract, temporal admission, contamination
-admission, hostile worker isolation, or release seal; it is a compiler/broker integration fixture,
-not a leaderboard episode.
+Some development-case fingerprints were previously visible in public repository history. Removing
+them from the release tree limits accidental reuse but cannot restore secrecy. Those cases and the
+existing development cohort must therefore remain reference/development material only. A
+commercial or held-out evaluation requires a newly selected private cohort frozen under the
+published admission policy before task-specific details are exposed.
 
 ## Residual risks
 
@@ -287,8 +267,7 @@ unseen Tier A cohorts are the only strong long-term control.
 
 ## Scientific task requirement
 
-Longer execution must add genuine information work, not busywork. The current RSV pilot contains
-protocol definitions but no discriminative pre-decision safety/reactogenicity results. It is useful
-for runner integration, not as a serious agentic vaccine-selection score. The first scored cohort
-should use historical windows containing real, cutoff-admissible evidence that could have changed
-the decision, or be collected prospectively before outcomes exist.
+Longer execution must add genuine information work, not busywork. A serious agentic
+vaccine-selection task needs discriminative, cutoff-admissible evidence that could have changed the
+decision; protocol structure alone is insufficient. A scored cohort should satisfy that standard
+under a frozen admission policy or be collected prospectively before outcomes exist.

@@ -8,3 +8,5 @@ and its proof files must be accepted only by the explicitly injected test verifi
 opened after that package has been independently sealed. The string `OUTCOME-CANARY-7X9Q` must
 never appear in decision artifacts or public challenge bytes.
 
+This project-authored fixture is licensed under `CC-BY-4.0`; retain the attribution specified in
+the repository `DATA_LICENSES.md`.

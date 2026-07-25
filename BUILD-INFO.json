@@ -1,8 +1,11 @@
 {
   "draft": false,
-  "file_count_before_generated_metadata": 452,
+  "file_count_before_generated_metadata": 459,
+  "private_export_policy_canonical_sha256": "94dfd3852fb327176cf7e323b1fbe3a2e3394293aff64cf90939d92229648dde",
   "release_name": "v0.1.0-alpha.1",
-  "schema_version": 1,
+  "schema_version": 2,
   "source_dirty": false,
-  "source_revision": "8321ac49a812fbdfa94005fd1dd88bf9839e3d87"
+  "source_revision": "bce285f988713098af7b2537d45791e1f00a6fdb",
+  "static_export_path_count": 459,
+  "static_export_paths_sha256": "00ab4254752847ad65163e6b1029c0d49f1b9c8e98063d5e63a222119c84498e"
 }

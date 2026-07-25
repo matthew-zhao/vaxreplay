@@ -18,15 +18,14 @@ Useful contributions include:
 - contamination-screening methods; and
 - reproducibility and receipt-verification tooling.
 
-Start with the [fictional development challenge](benchmarks/development/iedb-fictional-v1/README.md)
-and [reference-harness guide](docs/reference_harness_matrix.md). Retain every preregistered first
-attempt, including wrapper and schema failures. Commit the experiment protocol before inference;
-the [Cursor v0.4 protocol](benchmarks/development/iedb-fictional-v1/experiments/cursor-thinking-v04.md)
-is a concrete template. Do not publish raw reasoning streams or private provider credentials.
+Start with the [fictional development challenge](benchmarks/development/iedb-fictional-v1/challenge/)
+and [Agentic Replay guide](docs/agentic_replay_v1.md). Retain every preregistered first attempt,
+including wrapper and schema failures. Commit a pinned experiment protocol before inference. Do
+not publish raw reasoning streams or private provider credentials.
 
 ### Biomedical and data organizations
 
-Start with the [data-partner guide](docs/data_partner_guide.md) and the
+Start with the [technical-preview scope](docs/alpha_scope.md) and the
 [metadata-only issue template](https://github.com/matthew-zhao/vaxreplay/issues/new?template=data-partnership.yml).
 A data partnership does not require an initial code contribution.
 

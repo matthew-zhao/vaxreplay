@@ -47,7 +47,7 @@ class EpisodeBundleTest(unittest.TestCase):
         second = EpisodeBundle.load(_fixture_root()).manifest_sha256
 
         self.assertEqual(first, second)
-        self.assertEqual(first, '91081663c53dade67f7d0928b97a951e23e4cc94d85db3fbd7ad2ba321e78700')
+        self.assertEqual(first, '5d49243cf71a16fd71bc7477abfc33517ef0822ba0b34dfcede8767010c27796')
 
     def test_v0_label_commitment_and_prompt_bytes_are_golden(self) -> None:
         bundle = EpisodeBundle.load(_fixture_root(), include_private=True)
@@ -62,7 +62,7 @@ class EpisodeBundleTest(unittest.TestCase):
         )
         self.assertEqual(
             hashlib.sha256(build_episode_prompt(bundle).encode()).hexdigest(),
-            'cfe288b4d362337425e442d54c5bfd53e05532676d20b305b89913af9ed4ef25',
+            '4f85768dbffae4529145f5e72f448dcc0198e66feec00bd7bb56b29e6d23dc18',
         )
 
     def test_rejects_tampered_evidence_body(self) -> None:

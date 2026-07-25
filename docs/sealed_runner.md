@@ -34,7 +34,7 @@ system completes its run. Network denial cannot prevent a post-reveal image from
 
 The current challenge format implements the Core track: the envelope contains the exact system and
 user messages produced by the existing VaxReplay prompt compiler. The
-[Agent Track protocol](agent_track.md) now has a versioned Lane A contract, signed guest bootstrap,
+[Agentic Replay protocol](agentic_replay_v1.md) now has a versioned Lane A contract, signed guest bootstrap,
 frozen-workspace/local-tool boundary, trusted inference gateway, canonical development operator,
 and Firecracker qualification collector. That path remains development-only until its exact guest
 image, host, provider snapshot, cleanup/reconciliation adapters, and Linux/KVM execution pass the
@@ -131,8 +131,8 @@ arbitrary submitted system cannot honestly self-attest its hidden model-call or 
 
 ## Operator workflow
 
-The commands below exercise the lower-level challenge interface. The IEDB synthetic pilot should
-use the release-aware workflow in [IEDB release tiers and the sealed synthetic pilot](iedb_pilot.md),
+The commands below exercise the lower-level challenge interface. Literature-replay pilots should
+use the release-aware workflow in [Literature Replay V0](literature_replay.md),
 which binds split and temporal admission into the challenge and private package. Generic
 `make-challenge` leaves that admission optional.
 
@@ -202,7 +202,7 @@ rather than properties of a single process invocation.
 - Add asymmetric receipt signatures or an organizer-controlled transparency log for public
   verification beyond the implemented symmetric organizer HMAC.
 - Add organizer-controlled structured model/tool tracing for the fixed-model harness track.
-- Deploy and qualify the implemented [Agent Track](agent_track.md) frozen workspace, mediated
+- Deploy and qualify the implemented [Agentic Replay](agentic_replay_v1.md) frozen workspace, mediated
   inference gateway, call tracing, and provider boundary without mounting private source
   directories or exposing provider credentials to participant code.
 - Keep temporal provenance admission upstream: sealing a contaminated prompt only makes the

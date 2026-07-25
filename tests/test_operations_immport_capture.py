@@ -96,7 +96,7 @@ from vaxreplay.sources.immport import (
 
 _T0 = datetime(2026, 7, 14, 12, tzinfo=timezone.utc)
 _SOURCE_ID = 'immport:operational-test'
-_STUDY = 'SDY1234'
+_STUDY = 'SDY00000000'
 _IMPLEMENTATION_SHA256 = 'b' * 64
 _ENVIRONMENT_SHA256 = 'c' * 64
 

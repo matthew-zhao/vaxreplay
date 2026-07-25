@@ -72,7 +72,7 @@ def _case(
 
 def _manifest(cases: tuple[ExecutionCohortEvaluationCase, ...]) -> ExecutionCohortManifest:
     return make_execution_cohort_manifest(
-        cohort_id='real-aact-development',
+        cohort_id='fictional-conformance-cohort',
         cases=cases,
         lineage_split_manifest_sha256=_LINEAGE_SPLIT_SHA256,
         workspace_build_receipt_sha256=_WORKSPACE_RECEIPT_SHA256,
@@ -141,8 +141,8 @@ def test_manifest_rejects_a_lineage_that_crosses_splits_and_private_case_tamperi
         )
 
 
-def test_evaluator_handles_all_131_tasks_as_one_exact_coverage_macro_result() -> None:
-    cases = tuple(_case(index, split=Split.TEST) for index in range(1, 132))
+def test_evaluator_handles_complete_multi_task_coverage_as_one_macro_result() -> None:
+    cases = tuple(_case(index, split=Split.TEST) for index in range(1, 8))
     manifest = _manifest(cases)
     batch = make_execution_cohort_submission(
         manifest=manifest,
@@ -151,14 +151,14 @@ def test_evaluator_handles_all_131_tasks_as_one_exact_coverage_macro_result() ->
 
     result = ExecutionCohortEvaluator(manifest=manifest, cases=reversed(cases)).score(batch)
 
-    assert result.task_count == result.valid_task_count == result.metrics.task_count == 131
+    assert result.task_count == result.valid_task_count == result.metrics.task_count == 7
     assert result.invalid_task_count == 0
-    assert tuple(item.task_count for item in result.split_counts) == (0, 0, 131)
+    assert tuple(item.task_count for item in result.split_counts) == (0, 0, 7)
     assert result.evaluation_split == Split.TEST
     assert result.metrics.mean_reward == pytest.approx(1.0)
     assert result.metrics.mean_core_reward == pytest.approx(1.0)
-    assert result.metrics.enrollment_continuous.applied_task_count == 131
-    assert result.metrics.primary_completion_continuous.applied_task_count == 131
+    assert result.metrics.enrollment_continuous.applied_task_count == 7
+    assert result.metrics.primary_completion_continuous.applied_task_count == 7
     assert result.metrics.cutoff_facts.configured_task_count == 0
     assert result.full_manifest_coverage_verified and result.exactly_one_submission_per_task_verified
     assert result.aggregation_rejects_episode_subset_input

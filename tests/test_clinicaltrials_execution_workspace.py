@@ -92,7 +92,7 @@ def test_context_plan_is_deterministic_outcome_blind_and_identity_scrubbed() -> 
         public_text = ''.join(item.body for item in entry.context.cutoff_documents)
         assert 'NCT' not in public_text
         assert not any(private_id in public_text for private_id in private_ids)
-        assert 'Moderna' not in public_text
+        assert 'Fictional Biologics' not in public_text
         assert 'Candidate' not in public_text
 
 
@@ -128,7 +128,7 @@ def test_workspace_build_separates_public_organizer_private_and_verifies_exact_b
         assert (build.root / 'private').is_dir()
         public_payload = b''.join(path.read_bytes() for path in (build.root / 'public').rglob('*') if path.is_file())
         assert b'NCT' not in public_payload
-        assert b'Moderna' not in public_payload
+        assert b'Fictional Biologics' not in public_payload
         assert b'Candidate' not in public_payload
 
         task_path = next((build.root / 'public').glob('tasks/*/TASK.md'))

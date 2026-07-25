@@ -71,8 +71,6 @@ ADAPTER_SCHEMA_VERSION = 'vaxreplay.aact-execution-adapter-receipt.v0.1'
 ADAPTER_ID = 'aact-flatfile-registry-observed-execution-v0.1'
 SELECTION_UNIVERSE_RULE_ID = 'aact-high-recall-vaccine-screen-v0.1'
 LINEAGE_GROUPING_RULE_ID = 'aact-precutoff-exact-sponsor-product-lineage-v0.1'
-DEFAULT_DECISION_DATE = date(2020, 2, 1)
-DEFAULT_LABEL_DATE = date(2024, 2, 1)
 
 _DECISION_MEMBERS = (
     'conditions.txt',
@@ -141,6 +139,8 @@ _SELECTION_RULE = {
     'eligibility': 'execution_schema.aact-fixed-anchor-pre-results-phase1-vaccine-v0.1',
     'later_archive_fields_used': [],
 }
+# This checked-in rule is a public, contamination-exposed reference implementation. It must not be
+# reused as the undisclosed selection policy for a held-out or commercial cohort.
 _LINEAGE_RULE = {
     'rule_id': LINEAGE_GROUPING_RULE_ID,
     'archive_side': 'decision_only',
@@ -1445,9 +1445,9 @@ def build_aact_execution_cohort(
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--decision-archive', required=True, type=Path)
-    parser.add_argument('--decision-archive-date', type=date.fromisoformat, default=DEFAULT_DECISION_DATE)
+    parser.add_argument('--decision-archive-date', type=date.fromisoformat, required=True)
     parser.add_argument('--label-archive', required=True, type=Path)
-    parser.add_argument('--label-archive-date', type=date.fromisoformat, default=DEFAULT_LABEL_DATE)
+    parser.add_argument('--label-archive-date', type=date.fromisoformat, required=True)
     parser.add_argument('--catalog', type=Path)
     parser.add_argument('--acquisition-plan', type=Path)
     parser.add_argument('--decision-archive-receipt', type=Path)

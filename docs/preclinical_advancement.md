@@ -58,7 +58,7 @@ Official episodes require:
 - lineage separation across train and evaluation splits.
 
 These are task-level requirements, not sufficient official-leaderboard admission. Under the
-[leaderboard data policy](leaderboard_protocol.md), Tier A additionally requires a prospective
+[temporal-admission policy](temporal_admission.md), Tier A additionally requires a prospective
 pre-outcome seal over the complete candidate panel, decision evidence, decision definition, and
 organizer-adjudicated program lineage, followed later by a private outcome receipt. Independently
 archived historical versions can support Tier B retrospective research but never an official score;
@@ -99,9 +99,9 @@ A proposed source must pass all of these gates before an adapter is implemented:
 6. **Scale:** enough independent lineage groups exist for train, development, and sealed evaluation.
 
 ImmPort plus a frozen ClinicalTrials.gov protocol history remains a leading feasibility study, not
-an approved adapter. The first inventory is complete: its strict metadata screen retained 20 NCT
-IDs, but it created no episode because supported historical freeze, arm identity, assay timing,
-outcome comparability, and redistribution remain unresolved. The next step is a credentialed
+an approved adapter. An initial strict metadata screen retained a small candidate set, but it
+created no episode because supported historical freeze, arm identity, assay timing, outcome
+comparability, and redistribution remain unresolved. The next step is a credentialed
 three-to-five-lineage audit—not retrospective label construction from current records alone.
 
 ## Reporting

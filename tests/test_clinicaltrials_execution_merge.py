@@ -27,28 +27,28 @@ def _source_builds(root: Path) -> tuple[Path, Path]:
     label_2024 = root / 'label-2024.zip'
     _write_decision_zip(
         decision_2018,
-        decision_anchor=date(2018, 4, 1),
+        decision_anchor=date(2017, 5, 3),
         include_second_study=False,
-        first_lead_sponsor='Moderna',
+        first_lead_sponsor='Fictional Biologics',
     )
     _write_label_zip(label_2022)
-    _write_decision_zip(decision_2020, first_lead_sponsor='Moderna, Inc.')
+    _write_decision_zip(decision_2020, first_lead_sponsor='Fictional Biologics, Inc.')
     _write_label_zip(label_2024)
     first = root / 'source-2018'
     second = root / 'source-2020'
     build_aact_execution_cohort(
         decision_archive=decision_2018,
-        decision_archive_date=date(2018, 4, 1),
+        decision_archive_date=date(2017, 5, 3),
         label_archive=label_2022,
-        label_archive_date=date(2022, 4, 1),
+        label_archive_date=date(2021, 5, 3),
         output_root=first,
         synthetic_test_only=True,
     )
     build_aact_execution_cohort(
         decision_archive=decision_2020,
-        decision_archive_date=date(2020, 2, 1),
+        decision_archive_date=date(2020, 3, 2),
         label_archive=label_2024,
-        label_archive_date=date(2024, 2, 1),
+        label_archive_date=date(2024, 3, 2),
         output_root=second,
         synthetic_test_only=True,
     )
@@ -66,10 +66,10 @@ class AactExecutionMergeTests(unittest.TestCase):
             )
 
             assignments = {assignment.nct_id: assignment for assignment in build.inventory.assignments}
-            self.assertEqual(assignments['NCT00000001'].anchor_date, date(2018, 4, 1))
-            self.assertEqual(assignments['NCT00000001'].label_archive_date, date(2022, 4, 1))
-            self.assertEqual(assignments['NCT00000002'].anchor_date, date(2020, 2, 1))
-            self.assertEqual(assignments['NCT00000002'].label_archive_date, date(2024, 2, 1))
+            self.assertEqual(assignments['NCT00000001'].anchor_date, date(2017, 5, 3))
+            self.assertEqual(assignments['NCT00000001'].label_archive_date, date(2021, 5, 3))
+            self.assertEqual(assignments['NCT00000002'].anchor_date, date(2020, 3, 2))
+            self.assertEqual(assignments['NCT00000002'].label_archive_date, date(2024, 3, 2))
             self.assertEqual(len(assignments), 2)
 
             labels = {label.nct_id: label for label in build.labels.labels}

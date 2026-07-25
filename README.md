@@ -24,7 +24,7 @@ scoring, and execution evidence.
 ## Not included
 
 - real AACT/ClinicalTrials.gov, IEDB, ImmPort, VaxSeer, or FluSelect evaluation data;
-- the internal 131-task development cohort or its identities;
+- the private development cohort or its identities;
 - private real-data gold, organizer mappings, or source slices;
 - an admitted Tier A or Tier B benchmark;
 - a production-qualified execution service; or
@@ -32,6 +32,16 @@ scoring, and execution evidence.
 
 The available fictional fixtures test software compatibility and scoring mechanics. They do not
 measure biological knowledge or vaccine-development ability.
+
+Previously published development descriptions exposed enough structure to contaminate the existing
+AACT pilot and development cohort. Removing those details from this release tree does not
+restore secrecy: those cases are permanently reference/development material and are ineligible for
+held-out, commercial, or headline scoring. Any such evaluation requires a newly selected private
+cohort frozen before task-specific details are exposed.
+
+The checked-in AACT selection, taxonomy, and clinical-rubric code is likewise public reference
+semantics. It can be inspected and tested, but it cannot serve as an undisclosed policy for a
+future held-out evaluation.
 
 ## Quick start
 
